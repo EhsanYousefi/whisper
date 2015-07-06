@@ -1,0 +1,12 @@
+test: &default
+
+  ip: 127.0.0.1
+  user: cassandra
+  password: cassandra
+  keyspace: demo
+
+development:
+  <<: *default
+
+production:
+  <<: *default
