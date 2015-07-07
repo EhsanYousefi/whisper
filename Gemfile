@@ -14,9 +14,11 @@ gem 'pry'
 
 # Use active model for validation and error handeling
 gem 'activemodel'
-
 gem 'activesupport'
 
+
+# Json Web Token
+gem 'jwt'
 # Use Thin as webserver
 gem 'thin'
 

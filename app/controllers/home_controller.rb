@@ -1,11 +1,9 @@
 class HomeController < ApplicationController
 
   def main
-    binding.pry
-    app.json name: 'ehsan', other: {
-        sex: 12,
-        family: 'yousefi'
-      }
+
+    user = User.where(email: 'hossein.yousefi@live.com').first
+    app.json user.as_json
 
   end
 
