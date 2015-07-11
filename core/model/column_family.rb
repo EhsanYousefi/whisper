@@ -7,6 +7,7 @@ module Cassandra::ColumnFamily
   end
 
   def self.included(target)
+
     target.include ActiveModel::AttributeMethods
     target.include ActiveModel::Dirty
     target.include ActiveModel::Model
@@ -19,7 +20,7 @@ module Cassandra::ColumnFamily
   end
 
   def attributes
-    columns = self.class.columns.map {|c| "@#{c.to_s}" }
+    columns = self.class._columns.map {|c| "@#{c.to_s}" }
     Hash[columns.map { |v| [v.to_s[1..-1].to_sym, instance_variable_get(v)] }].with_indifferent_access
   end
 
@@ -28,7 +29,7 @@ module Cassandra::ColumnFamily
   def attributes=(hash)
 
     hash.each do |key, value|
-      raise InvalidColumnError.new("Invalid column: #{key.to_s}") unless self.class.columns.include?(key.to_sym)
+      raise InvalidColumnError.new("Invalid column: #{key.to_s}") unless self.class._columns.include?(key.to_sym)
       # instance_variable_set("@#{key}", value)
       send("#{key}=", value)
     end
@@ -44,13 +45,16 @@ module Cassandra::ColumnFamily
 
   module ClassMethods
 
-    def columns(*array)
-      begin
-        @@columns
-      rescue
-        @@columns = array.map &:to_sym
+    attr_accessor :_columns;
 
-        @@columns.each do |a|
+    def columns(*array)
+      binding.pry
+      if self._columns
+        self._columns
+      else
+        self._columns = array.map &:to_sym
+
+        self._columns.each do |a|
 
           a_write = "#{a}="
 
@@ -67,7 +71,7 @@ module Cassandra::ColumnFamily
 
         end
 
-        @@columns
+        self._columns
       end
     end
 
@@ -83,13 +87,18 @@ module Cassandra::ColumnFamily
       raise ArgumentError if hash.empty?
       options = options.with_indifferent_access
 
-      query = self.select_query(
-        self.database,
-        self.column_family_name,
-        hash.stringify_keys,
-        options[:order_by],
-        options[:order_type],
-        options[:limit])
+      begin
+        query = self.select_query(
+          self.database,
+          self.column_family_name,
+          hash.stringify_keys,
+          options[:order_by],
+          options[:order_type],
+          options[:limit]
+        )
+      rescue
+        return []
+      end
 
       query.map do |row|
         new = self.new(row)

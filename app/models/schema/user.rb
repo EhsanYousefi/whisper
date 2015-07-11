@@ -5,12 +5,14 @@ module Schema
         command = db.execute(
 
           "CREATE TABLE users (
-          email text PRIMARY KEY,
-          password text,
-          first_name text,
-          last_name text,
-          company text
-        );"
+            email text,
+            auth_token text,
+            password_digest text,
+            first_name text,
+            last_name text,
+            company text,
+            PRIMARY KEY (email,auth_token)
+          );"
 
         )
 

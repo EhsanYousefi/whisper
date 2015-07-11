@@ -1,8 +1,7 @@
 class BaseController
   attr_reader :app
 
-  @@before_start = []
-  @@on_finish = []
+  class << self; attr_accessor :_before_start, :_on_finish end
 
   def self.construct(arg)
     self.new(arg).response
@@ -14,23 +13,23 @@ class BaseController
   end
 
   def self.before_start(*args)
-    @@before_start = args
+    self._before_start = args
   end
 
   def self.on_finish(*args)
-    @@on_finish = args
+    self._on_finish = args
   end
 
   def main
-    base.erb "<h3>You should define `call` instance method on your controller class!</h3>"
+    app.erb "<h3>You should define `call` instance method on your controller class!</h3>"
   end
 
 
   def response
-    send_chain @@before_start
+    send_chain self.class._before_start unless self.class._before_start.blank?
     call_var = main
-    return call_var if @@on_finish.empty?
-    send_chain @@on_finish
+    return call_var if self.class._on_finish.blank?
+    send_chain self.class._on_finish
   end
 
   private

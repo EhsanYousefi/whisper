@@ -19,9 +19,18 @@ gem 'activesupport'
 
 # Json Web Token
 gem 'jwt'
+
+# Ruby objects with Publish-Subscribe capabilities
+gem 'wisper'
+
 # Use Thin as webserver
 gem 'thin'
 
+# Rack Helpers
+gem 'rack-contrib'
+
+# Password Encryption
+gem 'bcrypt'
 
 group :development do
   # Debugging is easy, sinatra interactive console
