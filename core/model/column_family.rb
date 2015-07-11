@@ -48,7 +48,6 @@ module Cassandra::ColumnFamily
     attr_accessor :_columns;
 
     def columns(*array)
-      binding.pry
       if self._columns
         self._columns
       else

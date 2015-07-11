@@ -3,7 +3,16 @@ class CreateUser
 
   def execute(attributes)
 
-    user = User.new(attributes)
+    # Prevent From Mass Assignment
+    user = User.new(
+      email:                  attributes[:email],
+      password:               attributes[:password],
+      password_confirmation:  attributes[:password_confirmation],
+      first_name:             attributes[:first_name],
+      last_name:              attributes[:last_name],
+      company:                attributes[:company]
+    )
+
     user.auth_token = user.generate_auth_token
 
     if user.create

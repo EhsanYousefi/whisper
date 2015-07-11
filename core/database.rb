@@ -1,32 +1,45 @@
 require 'cassandra'
 
 module Core::Database
+
+  def self.included(target)
+    target.extend ClassMethods
+  end
+
   class InvalidDatabaseConfiguration < StandardError; end
 
   def database
-    @database ||= init_db!
+    @database ||= self.class.database
   end
 
-  private
+  module ClassMethods
 
-  def init_db!
-    validate_db_config(load_db_config)
-    cluster = Cassandra.cluster(username: load_db_config['user'], password: load_db_config['password'], hosts: [load_db_config['ip']] )
-    cluster.connect(load_db_config['keyspace'])
-  end
+    def database
+      @@database ||= init_db!
+    end
 
-  def load_db_config
-    config ||= YAML.load_file(App.root.join('config', 'yaml', 'cassandra.yml'))[App.environment.to_s]
-  end
+    private
 
-  def validate_db_config(config)
+    def init_db!
+      validate_db_config(load_db_config)
+      cluster = Cassandra.cluster(username: load_db_config['user'], password: load_db_config['password'], hosts: [load_db_config['ip']] )
+      cluster.connect(load_db_config['keyspace'])
+    end
 
-    if (
+    def load_db_config
+      config ||= YAML.load_file(App.root.join('config', 'yaml', 'cassandra.yml'))[App.environment.to_s]
+    end
+
+    def validate_db_config(config)
+
+      if (
       config['user'].blank? ||
       config['password'].blank? ||
       config['ip'].blank? ||
       config['keyspace'].blank?
-    ) then raise InvalidDatabaseConfiguration
+      ) then raise InvalidDatabaseConfiguration
+      end
+
     end
 
   end

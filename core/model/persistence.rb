@@ -45,8 +45,10 @@ module Cassandra::Persistence
   def update_where!(hash={})
     return false unless valid?
 
-    data = self.changes.map do |k, v|
-      [k, v.last]
+    data = {}
+
+    self.changes.map do |k, v|
+      data[k] = v
     end
 
     self.class.update_query(self.send(:database), self.class.column_family_name, data.stringify_keys, hash.stringify_keys)
@@ -77,7 +79,7 @@ module Cassandra::Persistence
 
   private
   def database
-    App.get_instance.database
+    App.database
   end
 
   def persist!

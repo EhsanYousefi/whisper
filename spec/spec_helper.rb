@@ -5,6 +5,7 @@ ENV['RACK_ENV'] = 'test'
 require './core/environment'
 require 'rack/test'
 require 'pry'
+require 'factories'
 require_all APP_ROOT.join('spec/helpers')
 
 # sinatra configoration for test mode
@@ -32,7 +33,9 @@ App.set :logging, false
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.include Helpers::Sinatra
+  config.include Helpers::Cassandra
   config.include Rack::Test::Methods
+  config.include FactoryGirl::Syntax::Methods
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
@@ -55,6 +58,10 @@ RSpec.configure do |config|
     # `true` in RSpec 4.
     mocks.verify_partial_doubles = true
   end
+
+  # config.before(:suite) do
+  #   FactoryGirl.lint
+  # end
 
   # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
@@ -86,6 +93,7 @@ RSpec.configure do |config|
     # (e.g. via a command-line flag).
     config.default_formatter = 'doc'
   end
+
 
 
   # Print the 10 slowest examples and example groups at the

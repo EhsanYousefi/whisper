@@ -3,8 +3,8 @@ namespace :cassandra do
   desc "Setup Database For Development Environment"
 
   task :setup do
-
-    session.execute_async("
+    binding.pry
+    session.execute("
     CREATE KEYSPACE #{App.name}
       WITH replication = {
         'class': 'SimpleStrategy',

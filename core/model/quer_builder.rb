@@ -12,7 +12,7 @@ module Cassandra::QueryBuilder
   def update_query(session, column_family, data, where)
 
     session.execute(
-      "UPDATE #{column_family} SET #{update_args(data)} WHERE #{update_args(where)}",
+      "UPDATE #{column_family} SET #{update_args(data)} WHERE #{update_args_where(where)}",
       arguments: update_arguments(data, where)
     )
 
@@ -71,6 +71,17 @@ module Cassandra::QueryBuilder
     end
 
     str.sub(/.{1}$/,'')
+  end
+
+
+  def update_args_where(data)
+    str = ''
+
+    data.keys.each do |e|
+      str = str + (e + '= ? AND ')
+    end
+
+    str.sub(/.{5}$/,'')
   end
 
   def select_args(data)
