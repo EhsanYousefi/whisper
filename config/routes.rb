@@ -12,4 +12,8 @@ class App
     controller UserAuthenticationController
   end
 
+  post '/api/v1/app/create' do
+    controller CreateAppController
+  end
+
 end

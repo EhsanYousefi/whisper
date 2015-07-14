@@ -1,6 +1,7 @@
 module Schema
   module User
     class << self
+
       def create_column_family(db)
         command = db.execute(
 
@@ -11,6 +12,7 @@ module Schema
             first_name text,
             last_name text,
             company text,
+            apps map<text, frozen<list<app>>>,
             PRIMARY KEY (email,auth_token)
           );"
 

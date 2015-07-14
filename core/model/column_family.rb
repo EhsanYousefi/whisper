@@ -79,7 +79,7 @@ module Cassandra::ColumnFamily
     end
 
     def database
-      App.get_instance.database
+      App.database
     end
 
     def where(hash={},options={})
@@ -101,9 +101,25 @@ module Cassandra::ColumnFamily
 
       query.map do |row|
         new = self.new(row)
-        new.send(:persist!)
+        new.send(:persist!); new.send(:changes_applied)
         new
       end
+    end
+
+    def all
+
+      begin
+        query = self.select_all_query(self.database, self.column_family_name)
+      rescue
+        return []
+      end
+
+      query.map do |row|
+        new = self.new(row)
+        new.send(:persist!); new.send(:changes_applied)
+        new
+      end
+
     end
 
   end

@@ -41,6 +41,14 @@ module Cassandra::QueryBuilder
 
   end
 
+  def select_all_query(session, column_family)
+
+    session.execute(
+      "SELECT * FROM #{column_family}"
+    )
+
+  end
+
   def delete_query(session, column_family, where)
 
     session.execute(
