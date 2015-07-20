@@ -96,10 +96,10 @@ module Cassandra::QueryBuilder
     str = ''
 
     data.keys.each do |e|
-      str = str + (e + '= ?,')
+      str = str + (e + '= ? AND ')
     end
 
-    str.sub(/.{1}$/,'')
+    str.sub(/.{5}$/,'')
   end
 
   def delete_args(data)

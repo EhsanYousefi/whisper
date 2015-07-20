@@ -4,16 +4,20 @@ class App
     controller HomeController
   end
 
-  post '/registration' do
+  post '/api/v1/register' do
     controller CreateUserController
   end
 
-  post '/authentication' do
+  post '/api/v1/login' do
     controller UserAuthenticationController
   end
 
-  post '/api/v1/app/create' do
-    controller CreateAppController
+  post '/api/v1/storage/create' do
+    controller CreateStorageController
+  end
+
+  post '/api/v1/storage/store' do
+    controller StoreController
   end
 
 end

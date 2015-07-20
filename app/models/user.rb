@@ -16,5 +16,16 @@ class User
 
 end
 
-# x  = User.new(first_name: "ehsan", last_name: "yousefi", email: "ehsna.gfdf@live.com", password: "dfdf", auth_token: "dfdfdf")
+#x  = User.new(first_name: "ehsan", last_name: "yousefi", email: "ehsna.gfdf@live.com", password: "dfdf", auth_token: "dfdfdf")
 # { voyager: [{key: 'logs', structure: {name: { type: "string", presence: "true"}}}]}
+#
+# voyager:
+#   logs: {
+#     name: { type: },
+#     main: { type;}
+# }
+# }
+#
+# CREATE TYPE app(
+#
+#     )

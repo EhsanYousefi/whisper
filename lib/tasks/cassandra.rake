@@ -3,7 +3,6 @@ namespace :cassandra do
   desc "Setup Database For Development Environment"
 
   task :setup do
-    binding.pry
     session.execute("
     CREATE KEYSPACE #{App.name}
       WITH replication = {

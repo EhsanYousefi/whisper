@@ -13,7 +13,7 @@ class ApplicationController < BaseController
       # return app.json error: 'Unauthorized'
     end
 
-    auth.execute(app.env['HTTP_TOKEN'])
+    auth.execute(app.env['HTTP_TOKEN'] || app.env['Token'])
   end
 
   def current_user

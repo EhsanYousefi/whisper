@@ -98,10 +98,8 @@ DEPENDENCIES
   rake
   require_all
   rspec
+  rspec-mocks
   sinatra (~> 1.4.6)
   sinatra-contrib
   thin
   wisper
-
-BUNDLED WITH
-   1.10.5

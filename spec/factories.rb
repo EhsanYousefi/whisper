@@ -26,4 +26,27 @@ FactoryGirl.define do
 
   end
 
+  factory :storage do |u|
+
+    u.email { user.email }
+
+    u.sequence :name do |n|
+      "name#{n}"
+    end
+
+    u.sequence :key do |k|
+      "key#{k}"
+    end
+
+    u.column_family_name 'test_column_family_name'
+
+    u.structure(
+      {
+        field:   Cassandra::UDT.new(type: 'string', presence: 'true', searchable: 'true'),
+        field_1: Cassandra::UDT.new(type: 'integer', presence: 'true', searchable: 'true')
+      }
+    )
+
+  end
+
 end

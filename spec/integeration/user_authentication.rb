@@ -21,7 +21,7 @@ describe UserAuthenticationController do
       password: 'password'
       }
 
-      post 'authentication', payload
+      post '/api/v1/login', payload
 
       body = JSON.parse response.body
 
@@ -41,7 +41,7 @@ describe UserAuthenticationController do
           password: 'password'
           }
 
-          post 'authentication', payload
+          post '/api/v1/login', payload
 
           expect(response.status).to eql 401
 
@@ -54,7 +54,7 @@ describe UserAuthenticationController do
           password: 'password'
           }
 
-          post 'authentication', payload
+          post '/api/v1/login', payload
 
           expect(response.status).to eql 401
 
@@ -71,7 +71,7 @@ describe UserAuthenticationController do
           # password: 'password'
           }
 
-          post 'authentication', payload
+          post '/api/v1/login', payload
 
           expect(response.status).to eql 401
 
@@ -84,7 +84,7 @@ describe UserAuthenticationController do
           password: 'invalid'
           }
 
-          post 'authentication', payload
+          post '/api/v1/login', payload
 
           expect(response.status).to eql 401
 

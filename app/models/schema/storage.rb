@@ -1,18 +1,17 @@
 module Schema
-  module User
+  module Storage
     class << self
 
       def create_column_family(db)
         command = db.execute(
 
-          "CREATE TABLE users (
+          "CREATE TABLE storages (
             email text,
-            auth_token text,
-            password_digest text,
-            first_name text,
-            last_name text,
-            company text,
-            PRIMARY KEY (email,auth_token)
+            name text,
+            key text,
+            column_family_name text,
+            structure map<text,frozen<structure>>,
+            PRIMARY KEY (email, name, key)
           );"
 
         )
@@ -24,7 +23,7 @@ module Schema
       def drop_column_family(db)
         command = db.execute(
 
-          "DROP TABLE users;"
+          "DROP TABLE storages;"
 
         )
 

@@ -75,7 +75,7 @@ module Cassandra::ColumnFamily
     end
 
     def column_family_name
-      self.to_s.downcase.pluralize
+      self.to_s.underscore.pluralize
     end
 
     def database

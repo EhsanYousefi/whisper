@@ -1,15 +1,16 @@
 module Schema
-  module Types
-    module App
+  module Type
+    module Structure
       class << self
 
         def create_type(db)
           command = db.execute(
 
-          "CREATE TYPE app (
-            key text,
-            structure frozen<map<text, validation>>,
-          );"
+            "CREATE TYPE structure (
+              type text,
+              presence text,
+              searchable text
+            );"
 
           )
 
@@ -20,7 +21,7 @@ module Schema
         def drop_type(db)
           command = db.execute(
 
-          "DROP TYPE app;"
+            "DROP TYPE structure;"
 
           )
 

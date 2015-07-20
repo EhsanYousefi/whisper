@@ -19,7 +19,7 @@ describe CreateUserController do
         company: 'RoundTableApps'
       }
 
-      post '/registration', payload
+      post '/api/v1/register', payload
 
       body = JSON.parse response.body
 
@@ -48,7 +48,7 @@ describe CreateUserController do
             company: 'RoundTableApps'
           }
 
-          post '/registration', payload
+          post '/api/v1/register', payload
 
           body = JSON.parse response.body
 
@@ -68,7 +68,7 @@ describe CreateUserController do
             company: 'RoundTableApps'
           }
 
-          post '/registration', payload
+          post '/api/v1/register', payload
 
           body = JSON.parse response.body
 
@@ -88,7 +88,7 @@ describe CreateUserController do
             company: 'RoundTableApps'
           }
 
-          post '/registration', payload
+          post '/api/v1/register', payload
 
           body = JSON.parse response.body
 
@@ -112,7 +112,7 @@ describe CreateUserController do
             company: 'RoundTableApps'
           }
 
-          post '/registration', payload
+          post '/api/v1/register', payload
 
           body = JSON.parse response.body
 
@@ -132,7 +132,7 @@ describe CreateUserController do
             company: 'RoundTableApps'
           }
 
-          post '/registration', payload
+          post '/api/v1/register', payload
 
           body = JSON.parse response.body
 
@@ -156,7 +156,7 @@ describe CreateUserController do
             company: 'RoundTableApps'
           }
 
-          post '/registration', payload
+          post '/api/v1/register', payload
 
           body = JSON.parse response.body
 
@@ -176,7 +176,7 @@ describe CreateUserController do
             company: 'RoundTableApps'
           }
 
-          post '/registration', payload
+          post '/api/v1/register', payload
 
           body = JSON.parse response.body
 
@@ -200,7 +200,7 @@ describe CreateUserController do
             company: 'RoundTableApps'
           }
 
-          post '/registration', payload
+          post '/api/v1/register', payload
 
           body = JSON.parse response.body
 
@@ -220,7 +220,7 @@ describe CreateUserController do
             company: 'RoundTableApps'
           }
 
-          post '/registration', payload
+          post '/api/v1/register', payload
 
           body = JSON.parse response.body
 

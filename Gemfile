@@ -40,6 +40,7 @@ end
 group :test do
 
   gem 'rspec'
+  gem 'rspec-mocks'
   gem 'rack-test'
   gem 'factory_girl'
 
