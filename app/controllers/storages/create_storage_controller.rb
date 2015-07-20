@@ -3,7 +3,7 @@ class CreateStorageController < ApplicationController
   before_start :authorized?
 
   def main
-
+    
     create_storage = CreateStorage.new
 
     create_storage.subscribe(CreateColumnFamily)

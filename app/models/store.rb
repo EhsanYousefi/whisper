@@ -21,10 +21,6 @@ class Store
 
       columns *structure.keys
 
-      def column_family_name
-        cfn
-      end
-
       class << self
 
         def do_validation(name, key, structure)
@@ -34,9 +30,9 @@ class Store
             row_last = row.last.to_h.with_indifferent_access
 
             if row_last[:presence]
-              send(:validates, row.first, { type: row_last[:type].capitalize.constantize,  presence: true })
+              send(:validates, row.first, { type: row_last[:type].classify.constantize,  presence: true })
             else
-              send(:validates, row.first, { type: row_last[:type].capitalize.constantize })
+              send(:validates, row.first, { type: row_last[:type].classify.constantize })
             end
 
           end
@@ -48,6 +44,8 @@ class Store
       do_validation(name, key, structure)
 
     end
+    # Set Class Column Family name
+    klass._column_family_name = cfn
 
     begin
       self.class::Construct

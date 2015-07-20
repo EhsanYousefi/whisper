@@ -103,3 +103,6 @@ DEPENDENCIES
   sinatra-contrib
   thin
   wisper
+
+BUNDLED WITH
+   1.10.5

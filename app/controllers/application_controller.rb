@@ -1,6 +1,7 @@
 class ApplicationController < BaseController
 
   def authorized?
+
     auth = AuthorizeUser.new
 
     auth.on(:authorization_user_successfull) do |token|

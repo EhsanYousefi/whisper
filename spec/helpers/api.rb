@@ -25,7 +25,7 @@ module Helpers
     private
     def header(token = nil)
       return unless token
-      {'Token' => token }
+      { 'CONTENT_TYPE' => 'application/json', 'Token' => token }
     end
 
     def token(user)

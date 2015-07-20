@@ -46,6 +46,7 @@ module Cassandra::ColumnFamily
   module ClassMethods
 
     attr_accessor :_columns;
+    attr_accessor :_column_family_name
 
     def columns(*array)
       if self._columns
@@ -75,7 +76,7 @@ module Cassandra::ColumnFamily
     end
 
     def column_family_name
-      self.to_s.underscore.pluralize
+      self._column_family_name || self.to_s.underscore.pluralize
     end
 
     def database
