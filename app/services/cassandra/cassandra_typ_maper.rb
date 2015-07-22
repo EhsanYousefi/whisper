@@ -3,7 +3,7 @@ class CassandraTypeMapper
   VALID_TYPES = {
 
     'string'    => 'text',
-    'integer'   => 'int',
+    'integer'   => 'varint',
     'float'     => 'float',
     'time'      => 'timestamp',
     'inet'      => 'inet',

@@ -29,7 +29,7 @@ module Helpers
     end
 
     def token(user)
-      return unless user
+      return {} unless user
       auth = AuthenticateUser.new
 
       auth.on(:authenticate_user_successfull) do |token|

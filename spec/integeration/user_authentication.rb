@@ -17,11 +17,11 @@ describe UserAuthenticationController do
     it 'should authenticate user' do
 
       payload = {
-      email: user.email,
-      password: 'password'
+        email: user.email,
+        password: 'password'
       }
 
-      post '/api/v1/login', payload
+      post_request '/api/v1/login', payload.to_json
 
       body = JSON.parse response.body
 
@@ -37,11 +37,11 @@ describe UserAuthenticationController do
         it 'should err if email is missing' do
 
           payload = {
-          # email: user.email,
-          password: 'password'
+            # email: user.email,
+            password: 'password'
           }
 
-          post '/api/v1/login', payload
+          post_request '/api/v1/login', payload.to_json
 
           expect(response.status).to eql 401
 
@@ -50,11 +50,11 @@ describe UserAuthenticationController do
         it 'should err if email is invalid' do
 
           payload = {
-          email: 'wrong@wrong.com',
-          password: 'password'
+            email: 'wrong@wrong.com',
+            password: 'password'
           }
 
-          post '/api/v1/login', payload
+          post_request '/api/v1/login', payload.to_json
 
           expect(response.status).to eql 401
 
@@ -67,11 +67,11 @@ describe UserAuthenticationController do
         it 'should err if password is missing' do
 
           payload = {
-          email: user.email,
-          # password: 'password'
+            email: user.email,
+            # password: 'password'
           }
 
-          post '/api/v1/login', payload
+          post_request '/api/v1/login', payload.to_json
 
           expect(response.status).to eql 401
 
@@ -80,11 +80,11 @@ describe UserAuthenticationController do
         it 'should err if password is not valid' do
 
           payload = {
-          email: user.email,
-          password: 'invalid'
+            email: user.email,
+            password: 'invalid'
           }
 
-          post '/api/v1/login', payload
+          post_request '/api/v1/login', payload.to_json
 
           expect(response.status).to eql 401
 
@@ -93,7 +93,5 @@ describe UserAuthenticationController do
       end
 
     end
-
   end
-
 end

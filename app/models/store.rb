@@ -29,7 +29,7 @@ class Store
 
             row_last = row.last.to_h.with_indifferent_access
 
-            if row_last[:presence]
+            if row_last[:presence] == 'true'
               send(:validates, row.first, { type: row_last[:type].classify.constantize,  presence: true })
             else
               send(:validates, row.first, { type: row_last[:type].classify.constantize })

@@ -36,23 +36,23 @@ describe CreateStorageController do
         structure: {
           severity: {
             type: 'integer',
-            presence: true,
-            searchable: true
+            presence: 'true',
+            searchable: 'true'
           },
           time: {
             type: 'integer',
-            presence: true,
-            searchable: true
+            presence: 'true',
+            searchable: 'true'
           },
           message: {
             type: 'string',
-            presence: true,
-            searchable: true
+            presence: 'true',
+            searchable: 'true'
           }
         }
       }
 
-      post_request '/api/v1/storage/create', payload, user
+      post_request '/api/v1/storage/create', payload.to_json, user
 
       body = JSON.parse response.body
 
@@ -72,24 +72,24 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               },
               time: {
                 type: 'integer',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               },
               message: {
                 type: 'string',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
 
               }
             }
           }
 
-          post_request '/api/v1/storage/create', payload, user
+          post_request '/api/v1/storage/create', payload.to_json, user
 
           body = JSON.parse response.body
 
@@ -108,23 +108,23 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               },
               time: {
                 type: 'integer',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               },
               message: {
                 type: 'string',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               }
             }
           }
 
-          post_request '/api/v1/storage/create', payload, user
+          post_request '/api/v1/storage/create', payload.to_json, user
 
           body = JSON.parse response.body
 
@@ -146,23 +146,23 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               },
               time: {
                 type: 'integer',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               },
               message: {
                 type: 'string',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               }
             }
           }
 
-          post_request '/api/v1/storage/create', payload, user
+          post_request '/api/v1/storage/create', payload.to_json, user
 
           body = JSON.parse response.body
 
@@ -180,23 +180,23 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               },
               time: {
                 type: 'integer',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               },
               message: {
                 type: 'string',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               }
             }
           }
 
-          post_request '/api/v1/storage/create', payload, user
+          post_request '/api/v1/storage/create', payload.to_json, user
 
           body = JSON.parse response.body
 
@@ -218,7 +218,7 @@ describe CreateStorageController do
             key: 'logs',
           }
 
-          post_request '/api/v1/storage/create', payload, user
+          post_request '/api/v1/storage/create', payload.to_json, user
 
           body = JSON.parse response.body
 
@@ -235,23 +235,23 @@ describe CreateStorageController do
             key: 'logs',
             structure: {
               severity: {
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               },
               time: {
                 type: 'integer',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               },
               message: {
                 type: 'string',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               }
             }
           }
 
-          post_request '/api/v1/storage/create', payload, user
+          post_request '/api/v1/storage/create', payload.to_json, user
 
           body = JSON.parse response.body
 
@@ -269,23 +269,23 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integers',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               },
               time: {
                 type: 'integer',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               },
               message: {
                 type: 'string',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               }
             }
           }
 
-          post_request '/api/v1/storage/create', payload, user
+          post_request '/api/v1/storage/create', payload.to_json, user
 
           body = JSON.parse response.body
 
@@ -304,23 +304,23 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               },
               time: {
                 type: 'integer',
                 presence: 'sdfdsf',
-                searchable: true
+                searchable: 'true'
               },
               message: {
                 type: 'string',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               }
             }
           }
 
-          post_request '/api/v1/storage/create', payload, user
+          post_request '/api/v1/storage/create', payload.to_json, user
 
           body = JSON.parse response.body
 
@@ -338,22 +338,22 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                searchable: true
+                searchable: 'true'
               },
               time: {
                 type: 'integer',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               },
               message: {
                 type: 'string',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               }
             }
           }
 
-          post_request '/api/v1/storage/create', payload, user
+          post_request '/api/v1/storage/create', payload.to_json, user
 
           body = JSON.parse response.body
 
@@ -371,22 +371,22 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                presence: true
+                presence: 'true'
               },
               time: {
                 type: 'integer',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               },
               message: {
                 type: 'string',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               }
             }
           }
 
-          post_request '/api/v1/storage/create', payload, user
+          post_request '/api/v1/storage/create', payload.to_json, user
 
           body = JSON.parse response.body
 
@@ -404,23 +404,59 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                presence: true,
+                presence: 'true',
                 searchable: 'invalid'
               },
               time: {
                 type: 'integer',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               },
               message: {
                 type: 'string',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               }
             }
           }
 
-          post_request '/api/v1/storage/create', payload, user
+          post_request '/api/v1/storage/create', payload.to_json, user
+
+          body = JSON.parse response.body
+
+          expect(response.status).to eql 400
+          expect(body.to_s).to include 'validation_error'
+          expect(body.to_s).to include 'structure'
+
+        end
+
+        it 'should err if structure - > searchable == true and structure -> presence == false' do
+
+          payload = {
+            name: 'voyager',
+            key: 'logs',
+            structure: {
+              severity: {
+                type: 'integer',
+                presence: 'true',
+                searchable: 'true'
+              },
+
+              time: {
+                type: 'integer',
+                presence: 'false',
+                searchable: 'true'
+              },
+
+              message: {
+                type: 'string',
+                presence: 'true',
+                searchable: 'true'
+              }
+            }
+          }
+
+          post_request '/api/v1/storage/create', payload.to_json, user
 
           body = JSON.parse response.body
 
@@ -445,23 +481,23 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               },
               time: {
                 type: 'integer',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               },
               message: {
                 type: 'string',
-                presence: true,
-                searchable: true
+                presence: 'true',
+                searchable: 'true'
               }
             }
           }
 
-          post_request '/api/v1/storage/create', payload, user
+          post_request '/api/v1/storage/create', payload.to_json, user
 
           body = JSON.parse response.body
 

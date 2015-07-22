@@ -6,12 +6,12 @@ class StoreController < ApplicationController
 
     store = StoreOnStorage.new
 
-    store.on(:store_on_storage_invalid_storage) do |storage|
-
-      app.status 400
-      return app.json validation_error: storage.errors.to_h
-
-    end
+    # store.on(:store_on_storage_invalid_storage) do |storage|
+    #
+    #   app.status 400
+    #   return app.json validation_error: storage.errors.to_h
+    #
+    # end
 
     store.on(:store_on_storage_storage_not_found) do |attributes|
 
@@ -31,7 +31,7 @@ class StoreController < ApplicationController
     store.on(:store_on_storage_successful) do |store|
 
       app.status 201
-      return app.json store.as_json
+      return app.json id: store.id.to_s
 
     end
 

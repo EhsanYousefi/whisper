@@ -51,6 +51,13 @@ class Storage
 
     return errors.add(:structure, "structure -> searchable should be true or false") if validates_searchable.include? false
 
+    validates_presence_and_searchable = structure.map do |ps|
+      h = ps.last.to_h
+      !(h['presence'] == 'false' && h['searchable'] == 'true')
+    end
+
+    return errors.add(:structure, "structure -> serachable data is mandatory! please set presence -> true") if validates_presence_and_searchable.include? false
+
   end
 
 end
