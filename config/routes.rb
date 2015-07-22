@@ -20,8 +20,12 @@ class App
     controller StoreController
   end
 
-  get '/api/v1/storage/:storage/:key/page/:number' do
-    controller GetDataFromStorageController
+  # get '/api/v1/storage/:storage/:key/page/:number' do
+  #   controller GetDataFromStorageController
+  # end
+
+  get '/api/v1/storages' do
+    controller GetStoragesController
   end
 
 end
