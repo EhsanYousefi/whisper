@@ -91,7 +91,6 @@ describe StoreController do
 
       body = JSON.parse response.body
 
-      binding.pry
       expect(body['id']).to_not eql nil
       expect(response.status).to eql 201
 

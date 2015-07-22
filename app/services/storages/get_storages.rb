@@ -15,7 +15,6 @@ class GetStorages
   private
 
   def prepare_storages(storages)
-    binding.pry
     storages.map do |storage|
       {
       storage: storage.name,
