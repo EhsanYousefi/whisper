@@ -5,7 +5,7 @@ class GetStorages
   def execute(user)
 
     begin
-      broadcast(:get_storages_successfull, prepare_storages(Storage.where(email: user.email)))
+      broadcast(:get_storages_successfull, prepare_storages(Storage.where(user_name: user.user_name)))
     rescue
       broadcast(:get_storages_failed)
     end

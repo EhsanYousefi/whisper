@@ -28,12 +28,12 @@ describe StoreController do
     clean_database('User', 'Storage')
   end
 
-  let :email do
-    "roundtableapps@gmail.com"
+  let :user_name do
+    "EhsanYousefi"
   end
 
   let :user do
-    user = build(:user, email: email)
+    user = build(:user, user_name: user_name)
     user.create!
     user
   end
@@ -69,7 +69,7 @@ describe StoreController do
   end
 
   let :column_family_name do
-    "#{email}_whisper_logs".gsub /[@.]/, '_'
+    "#{user_name}_whisper_logs"
   end
 
   describe 'Store Data On Storage' do

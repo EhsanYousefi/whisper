@@ -2,11 +2,11 @@ class Storage
 
   include Cassandra::ColumnFamily
 
-  columns :email, :name, :key, :column_family_name, :structure
+  columns :user_name, :name, :key, :column_family_name, :structure
 
-  validates :email,       presence: true, type: String, format: {with: /@/, message: 'is incorrect' }, uniq_with: [:name, :key]
-  validates :name,        presence: true, type: String
-  validates :key,         presence: true, type: String
+  validates :user_name,   presence: true, type: String, format: { without: /\W/, message: 'is incorrect' }, uniq_with: [:name, :key]
+  validates :name,        presence: true, type: String, format: { without: /\W/, message: 'is incorrect' }
+  validates :key,         presence: true, type: String, format: { without: /\W/, message: 'is incorrect' }
   validates :column_family_name, presence: true, type: String
   validates :structure,   presence: true
 
@@ -61,18 +61,3 @@ class Storage
   end
 
 end
-
-
-#x  = User.new(first_name: "ehsan", last_name: "yousefi", email: "ehsna.gfdf@live.com", password: "dfdf", auth_token: "dfdfdf")
-# { voyager: [{key: 'logs', structure: {name: { type: "string", presence: "true"}}}]}
-#
-# voyager:
-#   logs: {
-#     name: { type: },
-#     main: { type;}
-# }
-# }
-#
-# CREATE TYPE app(
-#
-#     )

@@ -5,6 +5,7 @@ class CreateUser
 
     # Prevent From Mass Assignment
     user = User.new(
+      user_name:              attributes[:user_name],
       email:                  attributes[:email],
       password:               attributes[:password],
       password_confirmation:  attributes[:password_confirmation],

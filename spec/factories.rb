@@ -3,6 +3,10 @@ FactoryGirl.define do
 
   factory :user do |u|
 
+    u.sequence :user_name do |u|
+      "username#{u}"
+    end
+
     u.sequence :email do |e|
       "roundtableapps#{e}@gmail.com"
     end
@@ -28,7 +32,7 @@ FactoryGirl.define do
 
   factory :storage do |u|
 
-    u.email { user.email }
+    u.user_name { user.user_name }
 
     u.sequence :name do |n|
       "name#{n}"

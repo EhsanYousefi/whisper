@@ -11,12 +11,13 @@ describe CreateUserController do
     it 'should register an user' do
 
       payload = {
-        email: 'e.yousefi@roundtableapps.com',
-        password: 'jackjack',
-        password_confirmation: 'jackjack',
-        first_name: 'Ehsan',
-        last_name: 'Yousefi',
-        company: 'RoundTableApps'
+      user_name: 'ehsan_yousefi',
+      email: 'e.yousefi@roundtableapps.com',
+      password: 'jackjack',
+      password_confirmation: 'jackjack',
+      first_name: 'Ehsan',
+      last_name: 'Yousefi',
+      company: 'RoundTableApps'
       }
 
       post_request '/api/v1/register', payload.to_json
@@ -35,17 +36,85 @@ describe CreateUserController do
 
     context :failures do
 
+      context :user_name do
+
+        it 'should err if user_name is missing' do
+
+          payload = {
+          # user_name: 'ehsan_yousefi',
+          email: 'e.yousefi@roundtableapps.com',
+          password: 'jackjack',
+          password_confirmation: 'jackjack',
+          first_name: 'Ehsan',
+          last_name: 'Yousefi',
+          company: 'RoundTableApps'
+          }
+
+          post_request '/api/v1/register', payload.to_json
+
+          body = JSON.parse response.body
+
+          expect(response.status).to eql 400
+          expect(body['validation_error']).to_not eql nil
+
+        end
+
+        it 'should err if user_name is not valid' do
+
+          payload = {
+          user_name: '&invalid', # Invalid UserName
+          email: 'e.yousefi@roundtableapps.com',
+          password: 'jackjack',
+          password_confirmation: 'jackjack',
+          first_name: 'Ehsan',
+          last_name: 'Yousefi',
+          company: 'RoundTableApps'
+          }
+
+          post_request '/api/v1/register', payload.to_json
+
+          body = JSON.parse response.body
+
+          expect(response.status).to eql 400
+          expect(body['validation_error']).to_not eql nil
+
+        end
+
+        it 'should err if user_name is not string' do
+
+          payload = {
+          user_name: 2222222,
+          email: 'e.yousefi@roundtableapps.com',
+          password: 'jackjack',
+          password_confirmation: 'jackjack',
+          first_name: 'Ehsan',
+          last_name: 'Yousefi',
+          company: 'RoundTableApps'
+          }
+
+          post_request '/api/v1/register', payload.to_json
+
+          body = JSON.parse response.body
+
+          expect(response.status).to eql 400
+          expect(body['validation_error']).to_not eql nil
+
+        end
+
+      end
+
       context :email do
 
         it 'should err if email missing' do
 
           payload = {
-            # email: 'e.yousefi@roundtableapps.com',
-            password: 'jackjack',
-            password_confirmation: 'jackjack',
-            first_name: 'Ehsan',
-            last_name: 'Yousefi',
-            company: 'RoundTableApps'
+          user_name: 'ehsan_yousefi',
+          # email: 'e.yousefi@roundtableapps.com',
+          password: 'jackjack',
+          password_confirmation: 'jackjack',
+          first_name: 'Ehsan',
+          last_name: 'Yousefi',
+          company: 'RoundTableApps'
           }
 
           post_request '/api/v1/register', payload.to_json
@@ -60,12 +129,13 @@ describe CreateUserController do
         it 'should err if email is not string' do
 
           payload = {
-            email: 23232323232323,
-            password: 'jackjack',
-            password_confirmation: 'jackjack',
-            first_name: 'Ehsan',
-            last_name: 'Yousefi',
-            company: 'RoundTableApps'
+          user_name: 'ehsan_yousefi',
+          email: 23232323232323,
+          password: 'jackjack',
+          password_confirmation: 'jackjack',
+          first_name: 'Ehsan',
+          last_name: 'Yousefi',
+          company: 'RoundTableApps'
           }
 
           post_request '/api/v1/register', payload.to_json
@@ -80,12 +150,13 @@ describe CreateUserController do
         it 'should err if email is not valid' do
 
           payload = {
-            email: 'infogoogle.com', # Invalid Email
-            password: 'jackjack',
-            password_confirmation: 'jackjack',
-            first_name: 'Ehsan',
-            last_name: 'Yousefi',
-            company: 'RoundTableApps'
+          user_name: 'ehsan_yousefi',
+          email: 'infogoogle.com', # Invalid Email
+          password: 'jackjack',
+          password_confirmation: 'jackjack',
+          first_name: 'Ehsan',
+          last_name: 'Yousefi',
+          company: 'RoundTableApps'
           }
 
           post_request '/api/v1/register', payload.to_json
@@ -104,12 +175,13 @@ describe CreateUserController do
         it 'should err if password is missing' do
 
           payload = {
-            email: 'e.yousefi@roundtableapps.com',
-            # password: 'jackjack',
-            password_confirmation: 'jackjack',
-            first_name: 'Ehsan',
-            last_name: 'Yousefi',
-            company: 'RoundTableApps'
+          user_name: 'ehsan_yousefi',
+          email: 'e.yousefi@roundtableapps.com',
+          # password: 'jackjack',
+          password_confirmation: 'jackjack',
+          first_name: 'Ehsan',
+          last_name: 'Yousefi',
+          company: 'RoundTableApps'
           }
 
           post_request '/api/v1/register', payload.to_json
@@ -124,12 +196,13 @@ describe CreateUserController do
         it 'should err password does not match with password confirmation' do
 
           payload = {
-            email: 'e.yousefi@roundtableapps.com',
-            password: 'jackjack',
-            password_confirmation: 'password_does_not_match',
-            first_name: 'Ehsan',
-            last_name: 'Yousefi',
-            company: 'RoundTableApps'
+          user_name: 'ehsan_yousefi',
+          email: 'e.yousefi@roundtableapps.com',
+          password: 'jackjack',
+          password_confirmation: 'password_does_not_match',
+          first_name: 'Ehsan',
+          last_name: 'Yousefi',
+          company: 'RoundTableApps'
           }
 
           post_request '/api/v1/register', payload.to_json
@@ -148,12 +221,13 @@ describe CreateUserController do
         it 'should err if first_name is missing' do
 
           payload = {
-            email: 'e.yousefi@roundtableapps.com',
-            password: 'jackjack',
-            password_confirmation: 'password_does_not_match',
-            # first_name: 'Ehsan',
-            last_name: 'Yousefi',
-            company: 'RoundTableApps'
+          user_name: 'ehsan_yousefi',
+          email: 'e.yousefi@roundtableapps.com',
+          password: 'jackjack',
+          password_confirmation: 'password_does_not_match',
+          # first_name: 'Ehsan',
+          last_name: 'Yousefi',
+          company: 'RoundTableApps'
           }
 
           post_request '/api/v1/register', payload.to_json
@@ -168,12 +242,13 @@ describe CreateUserController do
         it 'should err if first_name is not string' do
 
           payload = {
-            email: 'e.yousefi@roundtableapps.com',
-            password: 'jackjack',
-            password_confirmation: 'password_does_not_match',
-            first_name: 24234324234, # As You see first name is not string
-            last_name: 'Yousefi',
-            company: 'RoundTableApps'
+          user_name: 'ehsan_yousefi',
+          email: 'e.yousefi@roundtableapps.com',
+          password: 'jackjack',
+          password_confirmation: 'password_does_not_match',
+          first_name: 24234324234, # As You see first name is not string
+          last_name: 'Yousefi',
+          company: 'RoundTableApps'
           }
 
           post_request '/api/v1/register', payload.to_json
@@ -192,12 +267,13 @@ describe CreateUserController do
         it 'should err if last_name is missing' do
 
           payload = {
-            email: 'e.yousefi@roundtableapps.com',
-            password: 'jackjack',
-            password_confirmation: 'password_does_not_match',
-            first_name: 'Ehsan',
-            # last_name: 'Yousefi',
-            company: 'RoundTableApps'
+          user_name: 'ehsan_yousefi',
+          email: 'e.yousefi@roundtableapps.com',
+          password: 'jackjack',
+          password_confirmation: 'password_does_not_match',
+          first_name: 'Ehsan',
+          # last_name: 'Yousefi',
+          company: 'RoundTableApps'
           }
 
           post_request '/api/v1/register', payload.to_json
@@ -212,12 +288,13 @@ describe CreateUserController do
         it 'should err if last_name is not string' do
 
           payload = {
-            email: 'e.yousefi@roundtableapps.com',
-            password: 'jackjack',
-            password_confirmation: 'password_does_not_match',
-            first_name: 'Ehsan',
-            last_name: 3432424234, # As you can see is not string
-            company: 'RoundTableApps'
+          user_name: 'ehsan_yousefi',
+          email: 'e.yousefi@roundtableapps.com',
+          password: 'jackjack',
+          password_confirmation: 'password_does_not_match',
+          first_name: 'Ehsan',
+          last_name: 3432424234, # As you can see is not string
+          company: 'RoundTableApps'
           }
 
           post_request '/api/v1/register', payload.to_json

@@ -8,12 +8,12 @@ class UserAuthenticationController < ApplicationController
       return app.json(token: token)
     end
 
-    auth_user.on(:authenticate_user_failed) do |email|
+    auth_user.on(:authenticate_user_failed) do |user_name|
       app.status 401
       return app.json error: "Authentication Failed"
     end
 
-    auth_user.execute(app.params[:email], app.params[:password])
+    auth_user.execute(app.params[:user_name], app.params[:password])
 
   end
 

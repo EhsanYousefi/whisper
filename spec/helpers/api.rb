@@ -36,7 +36,7 @@ module Helpers
         return token
       end
 
-      auth.execute(user.email, nil, true)
+      auth.execute(user.user_name, nil, true)
     end
 
   end

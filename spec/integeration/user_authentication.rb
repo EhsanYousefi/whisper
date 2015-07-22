@@ -17,7 +17,7 @@ describe UserAuthenticationController do
     it 'should authenticate user' do
 
       payload = {
-        email: user.email,
+        user_name: user.user_name,
         password: 'password'
       }
 
@@ -32,12 +32,12 @@ describe UserAuthenticationController do
 
     context :failuers do
 
-      context :email do
+      context :user_name do
 
-        it 'should err if email is missing' do
+        it 'should err if user_name is missing' do
 
           payload = {
-            # email: user.email,
+            # user_name: user.user_name,
             password: 'password'
           }
 
@@ -47,10 +47,10 @@ describe UserAuthenticationController do
 
         end
 
-        it 'should err if email is invalid' do
+        it 'should err if user_name is not exists in database' do
 
           payload = {
-            email: 'wrong@wrong.com',
+            user_name: 'imnotexists',
             password: 'password'
           }
 
@@ -67,7 +67,7 @@ describe UserAuthenticationController do
         it 'should err if password is missing' do
 
           payload = {
-            email: user.email,
+            user_name: user.user_name,
             # password: 'password'
           }
 
@@ -80,7 +80,7 @@ describe UserAuthenticationController do
         it 'should err if password is not valid' do
 
           payload = {
-            email: user.email,
+            user_name: user.user_name,
             password: 'invalid'
           }
 

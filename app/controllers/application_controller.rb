@@ -5,7 +5,7 @@ class ApplicationController < BaseController
     auth = AuthorizeUser.new
 
     auth.on(:authorization_user_successfull) do |token|
-      @current_user = User.where(email: token[:email]).first
+      @current_user = User.where(user_name: token[:user_name]).first
       return true
     end
 

@@ -1,27 +1,27 @@
 class AuthenticateUser
   include Wisper::Publisher
 
-  def execute(email, password, without_pwd = false)
+  def execute(user_name, password, without_pwd = false)
 
     if without_pwd
-      user = User.where(email: email).first
+      user = User.where(user_name: user_name).first
     else
-      user = authenticate(email,password)
+      user = authenticate(user_name,password)
     end
 
-    return broadcast(:authenticate_user_failed, email) unless user
+    return broadcast(:authenticate_user_failed, user_name) unless user
 
     broadcast(
       :authenticate_user_successfull,
-      JsonWebToken.encode({email: user.email, token: user.auth_token})
+      JsonWebToken.encode({user_name: user.user_name, token: user.auth_token})
     )
 
   end
 
   private
 
-  def authenticate(email ,password)
-    user = User.where(email: email).first
+  def authenticate(user_name ,password)
+    user = User.where(user_name: user_name).first
     return false unless user
     user.authenticate(password)
   end

@@ -6,12 +6,12 @@ module Schema
         command = db.execute(
 
           "CREATE TABLE storages (
-            email text,
+            user_name text,
             name text,
             key text,
             column_family_name text,
             structure map<text,frozen<structure>>,
-            PRIMARY KEY (email, name, key)
+            PRIMARY KEY (user_name, name, key)
           );"
 
         )

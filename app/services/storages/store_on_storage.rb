@@ -8,7 +8,7 @@ class StoreOnStorage
     # broadcast(:store_on_storage_invalid_storage, validate_storage.last) unless validate_storage.first
 
     # Find Storage based on #attributes information
-    storage = Storage.where(email: user.email, name: attributes[:storage], key: attributes[:key]).first
+    storage = Storage.where(user_name: user.user_name, name: attributes[:storage], key: attributes[:key]).first
     return(broadcast(:store_on_storage_storage_not_found, attributes)) unless storage
 
     # Create New Store Class Constructor

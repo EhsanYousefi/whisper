@@ -17,7 +17,7 @@ describe CreateStorageController do
   end
 
   let :user_storage do
-    storage = build(:storage, email: user.email)
+    storage = build(:storage, user_name: user.user_name)
     storage.create!
     storage
   end
@@ -135,6 +135,42 @@ describe CreateStorageController do
 
         end
 
+
+        it 'should err if invalid' do
+
+          payload = {
+          name: '*invalid',
+          key: 'logs',
+          structure: {
+          severity: {
+          type: 'integer',
+          presence: 'true',
+          searchable: 'true'
+          },
+          time: {
+          type: 'integer',
+          presence: 'true',
+          searchable: 'true'
+          },
+          message: {
+          type: 'string',
+          presence: 'true',
+          searchable: 'true'
+          }
+          }
+          }
+
+          post_request '/api/v1/storage/create', payload.to_json, user
+
+          body = JSON.parse response.body
+
+          expect(Storage.all.first).to eql nil
+          expect(response.status).to eql 400
+          expect(body.to_s).to include 'validation_error'
+          expect(body.to_s).to include 'name'
+
+        end
+
       end
 
       context :key do
@@ -194,6 +230,40 @@ describe CreateStorageController do
                 searchable: 'true'
               }
             }
+          }
+
+          post_request '/api/v1/storage/create', payload.to_json, user
+
+          body = JSON.parse response.body
+
+          expect(response.status).to eql 400
+          expect(body.to_s).to include 'validation_error'
+          expect(body.to_s).to include 'key'
+
+        end
+
+        it 'should err if invalid' do
+
+          payload = {
+          name: 'voyager',
+          key: '%invalid',
+          structure: {
+          severity: {
+          type: 'integer',
+          presence: 'true',
+          searchable: 'true'
+          },
+          time: {
+          type: 'integer',
+          presence: 'true',
+          searchable: 'true'
+          },
+          message: {
+          type: 'string',
+          presence: 'true',
+          searchable: 'true'
+          }
+          }
           }
 
           post_request '/api/v1/storage/create', payload.to_json, user

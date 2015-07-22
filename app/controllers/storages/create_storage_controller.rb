@@ -29,7 +29,7 @@ class CreateStorageController < ApplicationController
   private
 
   def create_storage_params
-    app.params[:email] = current_user.email
+    app.params[:user_name] = current_user.user_name
     app.params
   end
 

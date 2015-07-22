@@ -5,14 +5,14 @@ class CreateStorage
 
     # Prevent From Mass Assignment
     storage = Storage.new(
-      email:                  attributes[:email],
+      user_name:              attributes[:user_name],
       name:                   attributes[:name],
       key:                    attributes[:key],
       structure:              fix_cassandra_udt(attributes[:structure]),
       column_family_name: (
       (
-        (attributes[:email] + '_' + attributes[:name] + '_' + attributes[:key]).gsub(/[@.]/, '_')
-      ) if attributes[:email] && attributes[:name] && attributes[:key] )
+        (attributes[:user_name] + '_' + attributes[:name] + '_' + attributes[:key])
+      ) if attributes[:user_name] && attributes[:name] && attributes[:key] )
     )
 
     if storage.create

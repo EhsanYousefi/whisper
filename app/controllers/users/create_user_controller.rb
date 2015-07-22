@@ -12,10 +12,11 @@ class CreateUserController < ApplicationController
       auth_user.on(:authenticate_user_successfull) do |token|
         auth_token = token
       end
-      auth_user.execute(user.email, nil, true)
+      auth_user.execute(user.user_name, nil, true)
 
       app.status 201
       return app.json(
+          user_name: user.user_name,
           email: user.email,
           token: auth_token,
           first_name: user.first_name,

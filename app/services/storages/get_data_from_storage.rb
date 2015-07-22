@@ -3,7 +3,7 @@ class GetDataFromStorage
 
   def execute(user, attributes)
 
-    storage = Storage.where(email: user.email, name: attributes[:storage], key: attributes[:key]).first
+    storage = Storage.where(user_name: user.user_name, name: attributes[:storage], key: attributes[:key]).first
     return(broadcast(:get_data_from_storage_storage_not_found, attributes)) unless storage
 
     # Create New Store Class Constructor
