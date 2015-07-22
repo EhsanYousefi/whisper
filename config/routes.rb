@@ -28,4 +28,8 @@ class App
     controller GetStoragesController
   end
 
+  patch '/api/v1/user' do
+    controller UpdateUserController
+  end
+
 end
