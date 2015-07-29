@@ -3,7 +3,7 @@ module Cassandra::Persistence
   def create
     return false unless valid? || persisted?
     hash = self.to_h.compact
-
+    binding.pry
     begin
       self.class.insert_query(self.send(:database), self.class.column_family_name, hash.stringify_keys)
       changes_applied; persist!

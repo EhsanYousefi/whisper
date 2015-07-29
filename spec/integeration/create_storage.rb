@@ -55,7 +55,7 @@ describe CreateStorageController do
       post_request '/api/v1/storage/create', payload.to_json, user
 
       body = JSON.parse response.body
-
+      binding.pry
       expect(Storage.all.first).to_not eql nil
       expect(response.status).to eql 201
 

@@ -7,11 +7,16 @@ class CreateColumnFamily
       "CREATE TABLE #{storage['column_family_name']} (
         #{
           self.prepare_table_info(
-          self.extract_column_names_and_types(storage['structure']),
-          self.extract_clustering_keys(storage['structure']))
+            self.extract_column_names_and_types(storage['structure']),
+            self.prepare_primary_key
+          )
         }
       )"
     )
+
+    self.prepare_indexes(storage).each do |i|
+      App.database.execute i
+    end
 
   end
 
@@ -19,6 +24,7 @@ class CreateColumnFamily
 
   def self.prepare_storage(storage)
     storage = storage.to_h
+    storage['structure']['created_at'] = { type: 'integer' }
     storage['structure']['id'] = { type: 'timeuuid' }
     storage
   end
@@ -31,15 +37,16 @@ class CreateColumnFamily
 
   end
 
-  # c_n_t means column names and tyoes
-  def self.extract_clustering_keys(structure)
+  def self.prepare_indexes(storage)
 
-    clustering_keys = []
-    structure.each do |k,v|
-      (clustering_keys << k) if v.to_h['searchable'] == 'true'
-    end
+    storage['structure'].map do |k,v|
+      "CREATE INDEX ON #{storage['column_family_name']} (#{k})" if v.to_h['searchable'] == 'true'
+    end.compact
 
-    "PRIMARY KEY ((id), #{clustering_keys.join(',')})"
+  end
+
+  def self.prepare_primary_key
+    "PRIMARY KEY ((created_at), id)"
   end
 
   def self.prepare_table_info(columns, primary_key)

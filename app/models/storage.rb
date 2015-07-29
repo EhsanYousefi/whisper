@@ -2,12 +2,18 @@ class Storage
 
   include Cassandra::ColumnFamily
 
-  columns :user_name, :name, :key, :column_family_name, :structure
+  columns(
+    user_name:          String,
+    name:               String,
+    key:                String,
+    column_family_name: String,
+    structure:          Hash
+  )
 
-  validates :user_name,   presence: true, type: String, format: { without: /\W/, message: 'is incorrect' }, uniq_with: [:name, :key]
-  validates :name,        presence: true, type: String, format: { without: /\W/, message: 'is incorrect' }
-  validates :key,         presence: true, type: String, format: { without: /\W/, message: 'is incorrect' }
-  validates :column_family_name, presence: true, type: String
+  validates :user_name,   presence: true, format: { without: /\W/, message: 'is incorrect' }, uniq_with: [:name, :key]
+  validates :name,        presence: true, format: { without: /\W/, message: 'is incorrect' }
+  validates :key,         presence: true, format: { without: /\W/, message: 'is incorrect' }
+  validates :column_family_name, presence: true
   validates :structure,   presence: true
 
   validate  :validate_structure

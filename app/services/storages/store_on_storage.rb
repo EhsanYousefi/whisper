@@ -3,13 +3,12 @@ class StoreOnStorage
 
   def execute(user, attributes)
 
-    # Validates Storage
-    # validate_storage = storage_are_valid?(user,attributes)
-    # broadcast(:store_on_storage_invalid_storage, validate_storage.last) unless validate_storage.first
-
-    # Find Storage based on #attributes information
-    storage = Storage.where(user_name: user.user_name, name: attributes[:storage], key: attributes[:key]).first
-    return(broadcast(:store_on_storage_storage_not_found, attributes)) unless storage
+    # Check if storage exists or not
+    return broadcast(:store_on_storage_storage_not_found, attributes) unless find_storage(
+      user: user.user_name,
+      name: attributes[:storage],
+      key:  attributes[:key]
+    )
 
     # Create New Store Class Constructor
     store = Store.new(add_id_attribute(storage.to_h))
@@ -51,6 +50,14 @@ class StoreOnStorage
       { "#{k}" => v.to_h }
     end
 
+  end
+
+  def find_storage(hash={})
+    Storage.where(
+      user_name: hash[:user_name],
+      name: hash[:name],
+      key: hash[:key]
+    ).first
   end
 
 end

@@ -20,7 +20,7 @@ module Cassandra::ColumnFamily
   end
 
   def attributes
-    columns = self.class._columns.map {|c| "@#{c.to_s}" }
+    columns = self.class._columns.map {|k,v| "@#{k.to_s}" }
     Hash[columns.map { |v| [v.to_s[1..-1].to_sym, instance_variable_get(v)] }].with_indifferent_access
   end
 
@@ -48,26 +48,28 @@ module Cassandra::ColumnFamily
     attr_accessor :_columns;
     attr_accessor :_column_family_name
 
-    def columns(*array)
+    def columns(hash={})
       if self._columns
         self._columns
       else
-        self._columns = array.map &:to_sym
+        self._columns = hash.symbolize_keys
 
-        self._columns.each do |a|
+        self._columns.each do |k,v|
 
-          a_write = "#{a}="
+          a_write = "#{k}="
 
           # Define setter method ActiveSupport::Drity Compatible
           define_method(a_write) do |val|
-            send("#{a.to_s}_will_change!") unless val == instance_variable_get("@#{a}")
-            instance_variable_set("@#{a}", val)
+            send("#{k.to_s}_will_change!") unless val == instance_variable_get("@#{k}")
+            instance_variable_set("@#{k}", val)
           end
 
           # Define getter method ActiveSupport::Drity Compatible
-          define_method(a) do
-            instance_variable_get("@#{a}")
+          define_method(k) do
+            instance_variable_get("@#{k}")
           end
+
+          send(:validates, k, { type: v })
 
         end
 
