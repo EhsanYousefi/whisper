@@ -26,6 +26,8 @@ describe CreateUserController do
 
       expect(response.status).to eql 201
 
+      binding.pry
+
       expect(body['email']).to eql payload[:email]
       expect(body['first_name']).to eql payload[:first_name]
       expect(body['last_name']).to eql payload[:last_name]

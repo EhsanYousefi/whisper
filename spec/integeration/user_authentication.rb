@@ -17,7 +17,7 @@ describe UserAuthenticationController do
     it 'should authenticate user' do
 
       payload = {
-        user_name: user.user_name,
+        identification: user.user_name,
         password: 'password'
       }
 
@@ -37,7 +37,7 @@ describe UserAuthenticationController do
         it 'should err if user_name is missing' do
 
           payload = {
-            # user_name: user.user_name,
+            # identification: user.user_name,
             password: 'password'
           }
 
@@ -50,7 +50,7 @@ describe UserAuthenticationController do
         it 'should err if user_name is not exists in database' do
 
           payload = {
-            user_name: 'imnotexists',
+            identification: 'imnotexists',
             password: 'password'
           }
 
@@ -67,7 +67,7 @@ describe UserAuthenticationController do
         it 'should err if password is missing' do
 
           payload = {
-            user_name: user.user_name,
+            identification: user.user_name,
             # password: 'password'
           }
 
@@ -80,7 +80,7 @@ describe UserAuthenticationController do
         it 'should err if password is not valid' do
 
           payload = {
-            user_name: user.user_name,
+            identification: user.user_name,
             password: 'invalid'
           }
 

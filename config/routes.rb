@@ -1,5 +1,9 @@
 class App
 
+  # get '*' do
+  #   send_file "#{App.root}/dist/index.html"
+  # end
+
   get '/' do
     controller HomeController
   end
@@ -10,6 +14,10 @@ class App
 
   post '/api/v1/login' do
     controller UserAuthenticationController
+  end
+
+  post '/api/v1/refresh_token' do
+    controller UserRefreshTokenController
   end
 
   post '/api/v1/storage/create' do
