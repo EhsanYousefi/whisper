@@ -5,6 +5,8 @@ module Cassandra::Persistence
     hash = self.to_h.compact
     
     begin
+      # Serialize Data Before Insert
+      Cassandra::Custom::Serializer.new(self).serialize
       self.class.insert_query(self.send(:database), self.class.column_family_name, hash.stringify_keys)
       changes_applied; persist!
       true
@@ -17,6 +19,9 @@ module Cassandra::Persistence
   def create!
     return false unless valid? || persisted?
     hash = self.to_h.compact
+
+    # Serialize Data Before Insert
+    Cassandra::Custom::Serializer.new(self).serialize
 
     self.class.insert_query(self.send(:database), self.class.column_family_name, hash.stringify_keys)
 

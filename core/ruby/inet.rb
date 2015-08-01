@@ -1,0 +1,3 @@
+module Inet
+
+end
