@@ -1,0 +1,1 @@
+/Users/liberal/Desktop/dev/sinatra/wisper/whisper_ui/tmp/funnel-output_path-Uzq7HaPD.tmp/whisper-ui/tests/helpers/resolver.jshint.js

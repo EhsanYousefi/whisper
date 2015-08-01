@@ -1,0 +1,4 @@
+module('JSHint - components');
+test('components/messages-errors.js should pass jshint', function() { 
+  ok(false, 'components/messages-errors.js should pass jshint.\ncomponents/messages-errors.js: line 11, col 5, \'$\' is not defined.\n\n1 error'); 
+});

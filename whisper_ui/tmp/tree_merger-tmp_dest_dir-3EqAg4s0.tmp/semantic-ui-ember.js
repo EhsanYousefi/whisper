@@ -1,0 +1,1 @@
+/Users/liberal/Desktop/dev/sinatra/wisper/whisper_ui/tmp/reexporter-tmp_cache_dir-ITaCBqE1.tmp/reexports/semantic-ui-ember.js

@@ -1,0 +1,4 @@
+module('JSHint - controllers');
+test('controllers/login.js should pass jshint', function() { 
+  ok(false, 'controllers/login.js should pass jshint.\ncontrollers/login.js: line 9, col 98, \'rsp\' is not defined.\ncontrollers/login.js: line 13, col 20, \'rsp\' is defined but never used.\ncontrollers/login.js: line 16, col 21, \'rsp\' is defined but never used.\n\n3 errors'); 
+});

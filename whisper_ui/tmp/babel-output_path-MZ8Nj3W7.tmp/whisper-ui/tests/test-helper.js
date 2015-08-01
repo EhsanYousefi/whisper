@@ -1,0 +1,1 @@
+/Users/liberal/Desktop/dev/sinatra/wisper/whisper_ui/tmp/babel-cache_path-7vlnqt9E.tmp/whisper-ui/tests/test-helper.js

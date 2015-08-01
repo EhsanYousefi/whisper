@@ -1,0 +1,1 @@
+/Users/liberal/Desktop/dev/sinatra/wisper/whisper_ui/tmp/babel-output_path-u5cKPrEe.tmp/whisper-ui/tests/helpers/start-app.js

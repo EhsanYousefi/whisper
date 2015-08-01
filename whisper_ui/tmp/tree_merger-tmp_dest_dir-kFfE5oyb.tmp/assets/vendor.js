@@ -1,0 +1,1 @@
+/Users/liberal/Desktop/dev/sinatra/wisper/whisper_ui/tmp/caching-writer-dest-dir_COw4mp.tmp/assets/vendor.js

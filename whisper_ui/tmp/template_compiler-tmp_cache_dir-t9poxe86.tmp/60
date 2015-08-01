@@ -1,0 +1,123 @@
+export default Ember.HTMLBars.template((function() {
+  return {
+    meta: {
+      "revision": "Ember@1.13.3",
+      "loc": {
+        "source": null,
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 28,
+          "column": 0
+        }
+      },
+      "moduleName": "whisper-ui/templates/login.hbs"
+    },
+    arity: 0,
+    cachedFragment: null,
+    hasRendered: false,
+    buildFragment: function buildFragment(dom) {
+      var el0 = dom.createDocumentFragment();
+      var el1 = dom.createElement("div");
+      dom.setAttribute(el1,"class","ui grid container");
+      var el2 = dom.createTextNode("\n      ");
+      dom.appendChild(el1, el2);
+      var el2 = dom.createElement("form");
+      dom.setAttribute(el2,"class","ui error form segment");
+      dom.setAttribute(el2,"id","loginForm");
+      var el3 = dom.createTextNode("\n\n        ");
+      dom.appendChild(el2, el3);
+      var el3 = dom.createElement("div");
+      dom.setAttribute(el3,"class","field");
+      var el4 = dom.createTextNode("\n          ");
+      dom.appendChild(el3, el4);
+      var el4 = dom.createElement("div");
+      dom.setAttribute(el4,"class","ui left labeled input full-width");
+      var el5 = dom.createTextNode("\n            ");
+      dom.appendChild(el4, el5);
+      var el5 = dom.createElement("div");
+      dom.setAttribute(el5,"class","ui label");
+      var el6 = dom.createTextNode("\n              Username\n            ");
+      dom.appendChild(el5, el6);
+      dom.appendChild(el4, el5);
+      var el5 = dom.createTextNode("\n            ");
+      dom.appendChild(el4, el5);
+      var el5 = dom.createComment("");
+      dom.appendChild(el4, el5);
+      var el5 = dom.createTextNode("\n          ");
+      dom.appendChild(el4, el5);
+      dom.appendChild(el3, el4);
+      var el4 = dom.createTextNode("\n        ");
+      dom.appendChild(el3, el4);
+      dom.appendChild(el2, el3);
+      var el3 = dom.createTextNode("\n      ");
+      dom.appendChild(el2, el3);
+      var el3 = dom.createElement("br");
+      dom.appendChild(el2, el3);
+      var el3 = dom.createTextNode("\n        ");
+      dom.appendChild(el2, el3);
+      var el3 = dom.createElement("div");
+      dom.setAttribute(el3,"class","field");
+      var el4 = dom.createTextNode("\n          ");
+      dom.appendChild(el3, el4);
+      var el4 = dom.createElement("div");
+      dom.setAttribute(el4,"class","ui left labeled input full-width");
+      var el5 = dom.createTextNode("\n            ");
+      dom.appendChild(el4, el5);
+      var el5 = dom.createElement("div");
+      dom.setAttribute(el5,"class","ui label");
+      var el6 = dom.createTextNode("\n              Password\n            ");
+      dom.appendChild(el5, el6);
+      dom.appendChild(el4, el5);
+      var el5 = dom.createTextNode("\n            ");
+      dom.appendChild(el4, el5);
+      var el5 = dom.createComment("");
+      dom.appendChild(el4, el5);
+      var el5 = dom.createTextNode("\n          ");
+      dom.appendChild(el4, el5);
+      dom.appendChild(el3, el4);
+      var el4 = dom.createTextNode("\n        ");
+      dom.appendChild(el3, el4);
+      dom.appendChild(el2, el3);
+      var el3 = dom.createTextNode("\n        ");
+      dom.appendChild(el2, el3);
+      var el3 = dom.createElement("br");
+      dom.appendChild(el2, el3);
+      var el3 = dom.createTextNode("\n\n        ");
+      dom.appendChild(el2, el3);
+      var el3 = dom.createElement("button");
+      dom.setAttribute(el3,"type","submit");
+      dom.setAttribute(el3,"class","fluid pink ui button");
+      dom.setAttribute(el3,"style","text-align: right!important;");
+      var el4 = dom.createTextNode("Login");
+      dom.appendChild(el3, el4);
+      dom.appendChild(el2, el3);
+      var el3 = dom.createTextNode("\n      ");
+      dom.appendChild(el2, el3);
+      dom.appendChild(el1, el2);
+      var el2 = dom.createTextNode("\n\n  ");
+      dom.appendChild(el1, el2);
+      dom.appendChild(el0, el1);
+      var el1 = dom.createTextNode("\n");
+      dom.appendChild(el0, el1);
+      return el0;
+    },
+    buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+      var element0 = dom.childAt(fragment, [0, 1]);
+      var morphs = new Array(3);
+      morphs[0] = dom.createElementMorph(element0);
+      morphs[1] = dom.createMorphAt(dom.childAt(element0, [1, 1]),3,3);
+      morphs[2] = dom.createMorphAt(dom.childAt(element0, [5, 1]),3,3);
+      return morphs;
+    },
+    statements: [
+      ["element","action",["authenticate"],["on","submit"],["loc",[null,[3,12],[3,49]]]],
+      ["inline","input",[],["type","text","id","user_name"],["loc",[null,[10,12],[10,48]]]],
+      ["inline","input",[],["type","password","id","password"],["loc",[null,[19,12],[19,51]]]]
+    ],
+    locals: [],
+    templates: []
+  };
+}()));

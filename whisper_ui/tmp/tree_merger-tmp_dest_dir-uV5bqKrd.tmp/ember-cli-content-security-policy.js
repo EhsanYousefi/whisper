@@ -1,0 +1,1 @@
+/Users/liberal/Desktop/dev/sinatra/wisper/whisper_ui/tmp/funnel-output_path-6tJ9otoH.tmp/ember-cli-content-security-policy.js

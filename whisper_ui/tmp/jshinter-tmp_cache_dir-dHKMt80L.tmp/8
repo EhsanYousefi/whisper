@@ -1,0 +1,4 @@
+module('JSHint - controllers');
+test('controllers/login.js should pass jshint', function() { 
+  ok(false, 'controllers/login.js should pass jshint.\ncontrollers/login.js: line 9, col 73, \'onSucc\' is not defined.\ncontrollers/login.js: line 9, col 81, \'onFail\' is not defined.\n\n2 errors'); 
+});

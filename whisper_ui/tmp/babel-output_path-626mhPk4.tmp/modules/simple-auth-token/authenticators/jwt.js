@@ -1,0 +1,1 @@
+/Users/liberal/Desktop/dev/sinatra/wisper/whisper_ui/tmp/babel-cache_path-CXJGKFyY.tmp/modules/simple-auth-token/authenticators/jwt.js

@@ -1,0 +1,1 @@
+/Users/liberal/Desktop/dev/sinatra/wisper/whisper_ui/tmp/tree_merger-tmp_dest_dir-D2JIwy3t.tmp/initializers/export-application-global.js

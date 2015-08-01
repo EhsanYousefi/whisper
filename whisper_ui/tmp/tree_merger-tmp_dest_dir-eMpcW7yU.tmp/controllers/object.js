@@ -1,0 +1,1 @@
+/Users/liberal/Desktop/dev/sinatra/wisper/whisper_ui/tmp/tree_merger-tmp_dest_dir-SNMw0MAb.tmp/controllers/object.js

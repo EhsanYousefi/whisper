@@ -2,7 +2,7 @@ class CreateUserController < ApplicationController
 
   def main
     create_user = CreateUser.new
-
+    binding.pry
     create_user.on(:create_user_successful) do |user|
 
       auth_token = ''
@@ -29,7 +29,7 @@ class CreateUserController < ApplicationController
     create_user.on(:create_user_failed) do |user|
 
       app.status 400
-      return app.json validation_error: user.errors.to_h
+      return app.json errors: user.errors.to_h
 
     end
 

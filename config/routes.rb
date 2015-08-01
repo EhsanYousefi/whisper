@@ -8,7 +8,7 @@ class App
     controller HomeController
   end
 
-  post '/api/v1/register' do
+  post '/api/v1/users' do
     controller CreateUserController
   end
 

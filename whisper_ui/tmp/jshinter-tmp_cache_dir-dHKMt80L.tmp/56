@@ -1,0 +1,4 @@
+module('JSHint - components');
+test('components/messages-errors.js should pass jshint', function() { 
+  ok(false, 'components/messages-errors.js should pass jshint.\ncomponents/messages-errors.js: line 10, col 30, Missing semicolon.\ncomponents/messages-errors.js: line 6, col 5, \'$\' is not defined.\ncomponents/messages-errors.js: line 8, col 9, \'$\' is not defined.\n\n3 errors'); 
+});

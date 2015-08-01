@@ -1,0 +1,1 @@
+/Users/liberal/Desktop/dev/sinatra/wisper/whisper_ui/tmp/caching-writer-dest-dir_mlQwUX.tmp/assets/test-support.js

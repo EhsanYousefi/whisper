@@ -1,0 +1,1 @@
+/Users/liberal/Desktop/dev/sinatra/wisper/whisper_ui/tmp/funnel-output_path-TLshlqov.tmp/ember-qunit-notifications/index.js

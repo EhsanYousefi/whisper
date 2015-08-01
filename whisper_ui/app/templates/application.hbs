@@ -1,0 +1,19 @@
+<div id="header">
+  <div id="topMenu" class="ui menu without-radius">
+    <a class="item"><img src="/assets/images/logo.png"></a>
+    <a class="item">How it Works</a>
+    <div class="right menu">
+
+      {{#link-to 'signup' class="item"}}SignUp{{/link-to}}
+      {{#if session.isAuthenticated}}
+        <a class="item" {{ action 'invalidateSession' }}>Logout</a>
+      {{else}}
+        {{#link-to 'login' class="item"}}Login{{/link-to}}
+      {{/if}}
+
+    </div>
+  </div>
+</div>
+<div id={{ currentRouteName }} >
+  {{outlet}}
+</div>

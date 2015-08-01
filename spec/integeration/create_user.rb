@@ -20,13 +20,12 @@ describe CreateUserController do
       company: 'RoundTableApps'
       }
 
-      post_request '/api/v1/register', payload.to_json
+      post_request '/api/v1/users', payload.to_json
 
       body = JSON.parse response.body
 
       expect(response.status).to eql 201
 
-      binding.pry
 
       expect(body['email']).to eql payload[:email]
       expect(body['first_name']).to eql payload[:first_name]
@@ -52,12 +51,12 @@ describe CreateUserController do
           company: 'RoundTableApps'
           }
 
-          post_request '/api/v1/register', payload.to_json
+          post_request '/api/v1/users', payload.to_json
 
           body = JSON.parse response.body
 
           expect(response.status).to eql 400
-          expect(body['validation_error']).to_not eql nil
+          expect(body['errors']).to_not eql nil
 
         end
 
@@ -73,12 +72,12 @@ describe CreateUserController do
           company: 'RoundTableApps'
           }
 
-          post_request '/api/v1/register', payload.to_json
+          post_request '/api/v1/users', payload.to_json
 
           body = JSON.parse response.body
 
           expect(response.status).to eql 400
-          expect(body['validation_error']).to_not eql nil
+          expect(body['errors']).to_not eql nil
 
         end
 
@@ -94,12 +93,12 @@ describe CreateUserController do
           company: 'RoundTableApps'
           }
 
-          post_request '/api/v1/register', payload.to_json
+          post_request '/api/v1/users', payload.to_json
 
           body = JSON.parse response.body
 
           expect(response.status).to eql 400
-          expect(body['validation_error']).to_not eql nil
+          expect(body['errors']).to_not eql nil
 
         end
 
@@ -119,12 +118,12 @@ describe CreateUserController do
           company: 'RoundTableApps'
           }
 
-          post_request '/api/v1/register', payload.to_json
+          post_request '/api/v1/users', payload.to_json
 
           body = JSON.parse response.body
 
           expect(response.status).to eql 400
-          expect(body['validation_error']).to_not eql nil
+          expect(body['errors']).to_not eql nil
 
         end
 
@@ -140,12 +139,12 @@ describe CreateUserController do
           company: 'RoundTableApps'
           }
 
-          post_request '/api/v1/register', payload.to_json
+          post_request '/api/v1/users', payload.to_json
 
           body = JSON.parse response.body
 
           expect(response.status).to eql 400
-          expect(body['validation_error']).to_not eql nil
+          expect(body['errors']).to_not eql nil
 
         end
 
@@ -161,12 +160,12 @@ describe CreateUserController do
           company: 'RoundTableApps'
           }
 
-          post_request '/api/v1/register', payload.to_json
+          post_request '/api/v1/users', payload.to_json
 
           body = JSON.parse response.body
 
           expect(response.status).to eql 400
-          expect(body['validation_error']).to_not eql nil
+          expect(body['errors']).to_not eql nil
 
         end
 
@@ -186,12 +185,12 @@ describe CreateUserController do
           company: 'RoundTableApps'
           }
 
-          post_request '/api/v1/register', payload.to_json
+          post_request '/api/v1/users', payload.to_json
 
           body = JSON.parse response.body
 
           expect(response.status).to eql 400
-          expect(body['validation_error']).to_not eql nil
+          expect(body['errors']).to_not eql nil
 
         end
 
@@ -207,12 +206,12 @@ describe CreateUserController do
           company: 'RoundTableApps'
           }
 
-          post_request '/api/v1/register', payload.to_json
+          post_request '/api/v1/users', payload.to_json
 
           body = JSON.parse response.body
 
           expect(response.status).to eql 400
-          expect(body['validation_error']).to_not eql nil
+          expect(body['errors']).to_not eql nil
 
         end
 
@@ -232,12 +231,12 @@ describe CreateUserController do
           company: 'RoundTableApps'
           }
 
-          post_request '/api/v1/register', payload.to_json
+          post_request '/api/v1/users', payload.to_json
 
           body = JSON.parse response.body
 
           expect(response.status).to eql 400
-          expect(body['validation_error']).to_not eql nil
+          expect(body['errors']).to_not eql nil
 
         end
 
@@ -253,12 +252,12 @@ describe CreateUserController do
           company: 'RoundTableApps'
           }
 
-          post_request '/api/v1/register', payload.to_json
+          post_request '/api/v1/users', payload.to_json
 
           body = JSON.parse response.body
 
           expect(response.status).to eql 400
-          expect(body['validation_error']).to_not eql nil
+          expect(body['errors']).to_not eql nil
 
         end
 
@@ -278,12 +277,12 @@ describe CreateUserController do
           company: 'RoundTableApps'
           }
 
-          post_request '/api/v1/register', payload.to_json
+          post_request '/api/v1/users', payload.to_json
 
           body = JSON.parse response.body
 
           expect(response.status).to eql 400
-          expect(body['validation_error']).to_not eql nil
+          expect(body['errors']).to_not eql nil
 
         end
 
@@ -299,12 +298,12 @@ describe CreateUserController do
           company: 'RoundTableApps'
           }
 
-          post_request '/api/v1/register', payload.to_json
+          post_request '/api/v1/users', payload.to_json
 
           body = JSON.parse response.body
 
           expect(response.status).to eql 400
-          expect(body['validation_error']).to_not eql nil
+          expect(body['errors']).to_not eql nil
 
         end
 

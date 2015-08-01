@@ -1,0 +1,88 @@
+export default Ember.HTMLBars.template((function() {
+  return {
+    meta: {
+      "revision": "Ember@1.13.3",
+      "loc": {
+        "source": null,
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 14,
+          "column": 0
+        }
+      },
+      "moduleName": "whisper-ui/templates/login.hbs"
+    },
+    arity: 0,
+    cachedFragment: null,
+    hasRendered: false,
+    buildFragment: function buildFragment(dom) {
+      var el0 = dom.createDocumentFragment();
+      var el1 = dom.createElement("div");
+      dom.setAttribute(el1,"class","ui form");
+      var el2 = dom.createTextNode("\n  ");
+      dom.appendChild(el1, el2);
+      var el2 = dom.createElement("div");
+      dom.setAttribute(el2,"class","grouped inline fields");
+      var el3 = dom.createTextNode("\n    ");
+      dom.appendChild(el2, el3);
+      var el3 = dom.createElement("div");
+      dom.setAttribute(el3,"class","field");
+      var el4 = dom.createTextNode("\n      ");
+      dom.appendChild(el3, el4);
+      var el4 = dom.createComment("");
+      dom.appendChild(el3, el4);
+      var el4 = dom.createTextNode("\n    ");
+      dom.appendChild(el3, el4);
+      dom.appendChild(el2, el3);
+      var el3 = dom.createTextNode("\n    ");
+      dom.appendChild(el2, el3);
+      var el3 = dom.createElement("div");
+      dom.setAttribute(el3,"class","field");
+      var el4 = dom.createTextNode("\n      ");
+      dom.appendChild(el3, el4);
+      var el4 = dom.createComment("");
+      dom.appendChild(el3, el4);
+      var el4 = dom.createTextNode("\n    ");
+      dom.appendChild(el3, el4);
+      dom.appendChild(el2, el3);
+      var el3 = dom.createTextNode("\n    ");
+      dom.appendChild(el2, el3);
+      var el3 = dom.createElement("div");
+      dom.setAttribute(el3,"class","field");
+      var el4 = dom.createTextNode("\n      ");
+      dom.appendChild(el3, el4);
+      var el4 = dom.createComment("");
+      dom.appendChild(el3, el4);
+      var el4 = dom.createTextNode("\n    ");
+      dom.appendChild(el3, el4);
+      dom.appendChild(el2, el3);
+      var el3 = dom.createTextNode("\n  ");
+      dom.appendChild(el2, el3);
+      dom.appendChild(el1, el2);
+      var el2 = dom.createTextNode("\n");
+      dom.appendChild(el1, el2);
+      dom.appendChild(el0, el1);
+      var el1 = dom.createTextNode("\n");
+      dom.appendChild(el0, el1);
+      return el0;
+    },
+    buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
+      var element0 = dom.childAt(fragment, [0, 1]);
+      var morphs = new Array(3);
+      morphs[0] = dom.createMorphAt(dom.childAt(element0, [1]),1,1);
+      morphs[1] = dom.createMorphAt(dom.childAt(element0, [3]),1,1);
+      morphs[2] = dom.createMorphAt(dom.childAt(element0, [5]),1,1);
+      return morphs;
+    },
+    statements: [
+      ["inline","ui-radio",[],["name","fruit","label","Once a week","value","apple","current",["subexpr","@mut",[["get","fruit",["loc",[null,[4,72],[4,77]]]]],[],[]]],["loc",[null,[4,6],[4,79]]]],
+      ["inline","ui-radio",[],["name","fruit","label","2-3 times a week","value","orange","current",["subexpr","@mut",[["get","fruit",["loc",[null,[7,78],[7,83]]]]],[],[]]],["loc",[null,[7,6],[7,85]]]],
+      ["inline","ui-radio",[],["name","fruit","label","Once a day","value","grape","current",["subexpr","@mut",[["get","fruit",["loc",[null,[10,71],[10,76]]]]],[],[]]],["loc",[null,[10,6],[10,78]]]]
+    ],
+    locals: [],
+    templates: []
+  };
+}()));
