@@ -1,1 +1,0 @@
-/Users/liberal/Desktop/dev/sinatra/wisper/whisper_ui/tmp/template_compiler-tmp_dest_dir-mqqzxDAf.tmp/whisper-ui/templates/application.js

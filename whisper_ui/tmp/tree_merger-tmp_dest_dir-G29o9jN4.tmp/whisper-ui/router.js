@@ -1,1 +1,0 @@
-/Users/liberal/Desktop/dev/sinatra/wisper/whisper_ui/tmp/babel-output_path-0xTQycf3.tmp/whisper-ui/router.js

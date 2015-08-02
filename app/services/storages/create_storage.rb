@@ -34,7 +34,7 @@ class CreateStorage
       new_hash[k] = Cassandra::UDT.new(v)
     end
 
-    new_hash
+    # new_hash[:__date__] = Cassandra::UDT.new(type: Integer)
   end
 
 end

@@ -1,1 +1,0 @@
-/Users/liberal/Desktop/dev/sinatra/wisper/whisper_ui/tmp/babel-cache_path-qI3nwbhl.tmp/whisper-ui/initializers/export-application-global.js

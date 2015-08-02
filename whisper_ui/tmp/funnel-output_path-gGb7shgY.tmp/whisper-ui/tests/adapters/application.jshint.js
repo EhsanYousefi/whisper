@@ -1,1 +1,0 @@
-/Users/liberal/Desktop/dev/sinatra/wisper/whisper_ui/tmp/tree_merger-tmp_dest_dir-zsbLK1m7.tmp/whisper-ui/tests/adapters/application.jshint.js

@@ -1,1 +1,0 @@
-/Users/liberal/Desktop/dev/sinatra/wisper/whisper_ui/tmp/babel-cache_path-HaBeWPFh.tmp/whisper-ui/tests/helpers/start-app.js

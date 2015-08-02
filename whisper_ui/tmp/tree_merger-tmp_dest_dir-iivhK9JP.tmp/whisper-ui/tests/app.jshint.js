@@ -1,1 +1,0 @@
-/Users/liberal/Desktop/dev/sinatra/wisper/whisper_ui/tmp/jshinter-tmp_cache_dir-dHKMt80L.tmp/1

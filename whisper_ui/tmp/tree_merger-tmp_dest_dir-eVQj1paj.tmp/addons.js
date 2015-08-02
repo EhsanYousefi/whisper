@@ -1,1 +1,0 @@
-/Users/liberal/Desktop/dev/sinatra/wisper/whisper_ui/tmp/caching-writer-dest-dir_mI0x67.tmp/addons.js

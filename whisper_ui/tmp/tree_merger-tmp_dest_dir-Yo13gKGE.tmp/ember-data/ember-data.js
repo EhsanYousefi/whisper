@@ -1,1 +1,0 @@
-/Users/liberal/Desktop/dev/sinatra/wisper/whisper_ui/tmp/funnel-output_path-R7lunC0o.tmp/ember-data/ember-data.js

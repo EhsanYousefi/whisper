@@ -1,1 +1,0 @@
-/Users/liberal/Desktop/dev/sinatra/wisper/whisper_ui/tmp/class-tmp_cache_dir-JS8MKL7t.tmp/addons.js

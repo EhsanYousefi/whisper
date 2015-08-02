@@ -10,7 +10,7 @@ module Schema
             name text,
             key text,
             column_family_name text,
-            structure map<text,frozen<structure>>,
+            structure text,
             PRIMARY KEY (user_name, name, key)
           );"
 

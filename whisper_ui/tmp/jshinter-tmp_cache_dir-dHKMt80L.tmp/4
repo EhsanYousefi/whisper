@@ -1,4 +1,0 @@
-module('JSHint - controllers');
-test('controllers/login.js should pass jshint', function() { 
-  ok(false, 'controllers/login.js should pass jshint.\ncontrollers/login.js: line 8, col 16, Missing semicolon.\ncontrollers/login.js: line 8, col 7, \'xl\' is not defined.\n\n2 errors'); 
-});
