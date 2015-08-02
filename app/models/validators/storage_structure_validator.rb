@@ -1,7 +1,7 @@
 class StorageStructureValidator
 
   attr_reader :errors
-  BOOLEAN_TYPES = ['true', 'false', nil]
+  BOOLEAN_TYPES = [true, false, nil]
 
   def initialize(struct)
     @struct = struct.with_indifferent_access
@@ -51,7 +51,7 @@ class StorageStructureValidator
       BOOLEAN_TYPES.include? v['required']
     end
 
-    errors << "structure -> `required` should be one of #{['true', 'false'].inspect}" if validate.include? false
+    errors << "structure -> `required` should be one of #{[true, false].inspect}" if validate.include? false
 
   end
 
@@ -61,7 +61,7 @@ class StorageStructureValidator
       BOOLEAN_TYPES.include? v['index']
     end
 
-    errors << "structure -> `index` should be one of #{['true', 'false'].inspect}" if validate.include? false
+    errors << "structure -> `index` should be one of #{[true, false].inspect}" if validate.include? false
 
   end
 
@@ -70,7 +70,7 @@ class StorageStructureValidator
     o = nil
     validate = @struct.map do |k,v|
 
-      if v['index'] == 'true' and !Cassandra::Custom::Indexable.include?(v['type'])
+      if v['index'] == true and !Cassandra::Custom::Indexable.include?(v['type'])
         o = v['type']
         false
       else
@@ -87,7 +87,7 @@ class StorageStructureValidator
     count = 1
 
     validate = @struct.map do |k,v|
-      v['index'] == 'true'
+      v['index'] == true
     end
 
     errors << "structure -> `index` could not be used more than #{count} times" if (validate - [false]).count > 1
@@ -109,7 +109,7 @@ class StorageStructureValidator
   #   o = ''
   #   validate = @struct.map do |s|
   #     o = h.last.to_h
-  #     if o['sort'] == 'true' and !Cassandra::Custom::Sortable.include?(o['type'])
+  #     if o['sort'] == true and !Cassandra::Custom::Sortable.include?(o['type'])
   #       false
   #     else
   #       true
@@ -125,7 +125,7 @@ class StorageStructureValidator
   #   count = 2
   #
   #   validate = @struct.map do |s|
-  #     h.last.to_h['sort'] == 'true'
+  #     h.last.to_h['sort'] == true
   #   end
   #
   #   errors << "structure -> `sort` could not be used more than #{count} times" if (validate - [false]).count > 1
@@ -151,14 +151,14 @@ class StorageStructureValidator
   def validate_default_with_required
 
     validate = @struct.map do |k,v|
-      if v['default'] and v['required'] == 'true'
+      if v['default'] and v['required'] == true
         false
       else
         true
       end
     end
 
-    errors << "structure -> `default` could not be used with `required: 'true'`" if validate.include? false
+    errors << "structure -> `default` could not be used with `required: true`" if validate.include? false
 
   end
 
@@ -174,10 +174,10 @@ class StorageStructureValidator
       end
 
 
-      # !v['default'].nil? and o['default'].kind_of? Cassandra::Custom::Mapper.get_type(v['type'])
+      # !v['default'].nil? and o['default'].kind_of? Cassandra::Custom::TypeMapper.get_type(v['type'])
     end
 
-    errors << "structure -> `default` could be matched with `type`" if validate.include? false
+    # errors << "structure -> `default` could be matched with `type`" if validate.include? false
 
   end
 
@@ -185,13 +185,16 @@ class StorageStructureValidator
     return errors << "structure -> `default` could be matched with `type`" unless val.kind_of?(Hash)
 
     validate = val.map do |k,v|
-      return false unless v.kind_of?(String) # We only accept Map with this condition Map<text, text>
-      true
+      if v.kind_of? String
+        true
+      else
+        false
+      end
     end
 
     if validate.include?(false)
       errors << "structure -> `default` with `map` type could be string in both directions like: {'key': 'value' }"
-      return false
+      false
     else
       true
     end
@@ -206,13 +209,16 @@ class StorageStructureValidator
     end
 
     validate = val.map do |k,v|
-      return false unless v.kind_of?(String) # We only accept Map with this condition Map<text, text>
-      true
+      if v.kind_of?(String) # We only accept Map with this condition Map<text, text>
+        true
+      else
+        false
+      end
     end
 
     if validate.include?(false)
       errors << "structure -> `default` with `array` type could only contain string like: ['string', 'string']"
-      return false
+      false
     else
       true
     end

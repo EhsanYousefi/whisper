@@ -36,12 +36,12 @@ describe CreateStorageController do
         structure: {
           severity: {
             type: 'integer',
-            required: 'true',
-            index: 'true'
+            required: true,
+            index: true
           },
           time: {
             type: 'time',
-            required: 'true'
+            required: true
           },
           desc: {
             type: 'text'
@@ -56,6 +56,7 @@ describe CreateStorageController do
       post_request '/api/v1/storage/create', payload.to_json, user
 
       body = JSON.parse response.body
+
       expect(Storage.all.first).to_not eql nil
       expect(response.status).to eql 201
 
@@ -73,12 +74,12 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                required: 'true',
-                index: 'true'
+                required: true,
+                index: true
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'text'
@@ -109,12 +110,12 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                required: 'true',
-                index: 'true'
+                required: true,
+                index: true
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'text'
@@ -146,12 +147,12 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                required: 'true',
-                index: 'true'
+                required: true,
+                index: true
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'text'
@@ -186,12 +187,12 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                required: 'true',
-                index: 'true'
+                required: true,
+                index: true
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'text'
@@ -221,12 +222,12 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                required: 'true',
-                index: 'true'
+                required: true,
+                index: true
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'text'
@@ -256,12 +257,12 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                required: 'true',
-                index: 'true'
+                required: true,
+                index: true
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'text'
@@ -295,20 +296,20 @@ describe CreateStorageController do
             # structure: {
             #   severity: {
             #     type: 'integer',
-            #     required: 'true',
-            #     index: 'true',
+            #     required: true,
+            #     index: true,
             #     default: 2
             #   },
             #   time: {
             #     type: 'time',
-            #     required: 'true'
+            #     required: true
             #   },
             #   desc: {
             #     type: 'text'
             #   },
             #   message: {
             #     type: 'text',
-            #     required: 'true',
+            #     required: true,
             #     default: 'mikel'
             #   }
             # }
@@ -332,12 +333,12 @@ describe CreateStorageController do
             structure: {
               severity: {
                 # type: 'integer',
-                required: 'true',
-                index: 'true'
+                required: true,
+                index: true
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'text'
@@ -367,12 +368,12 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'invalid',
-                required: 'true',
-                index: 'true'
+                required: true,
+                index: true
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'text'
@@ -404,11 +405,11 @@ describe CreateStorageController do
               severity: {
                 type: 'integer',
                 required: 'invalid',
-                index: 'true'
+                index: true
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'text'
@@ -438,12 +439,12 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                required: 'true',
+                required: true,
                 index: 'invalid'
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'text'
@@ -473,16 +474,16 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                required: 'true',
-                index: 'true'
+                required: true,
+                index: true
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'string',
-                index: 'true'
+                index: true
               },
               message: {
                 type: 'text',
@@ -509,15 +510,15 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                required: 'true'
+                required: true
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'text',
-                index: 'true'
+                index: true
               },
               message: {
                 type: 'text',
@@ -545,15 +546,15 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                required: 'true'
+                required: true
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'map',
-                index: 'true'
+                index: true
               },
               message: {
                 type: 'text',
@@ -581,15 +582,15 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                required: 'true'
+                required: true
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'array',
-                index: 'true'
+                index: true
               },
               message: {
                 type: 'text',
@@ -617,16 +618,16 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                required: 'true'
+                required: true
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'integer',
-                required: 'true',
-                index: 'true',
+                required: true,
+                index: true,
                 default: 2
               },
               message: {
@@ -655,15 +656,15 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                required: 'true'
+                required: true
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'timeuuid',
-                index: 'true',
+                index: true,
                 default: 2
               },
               message: {
@@ -692,15 +693,15 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                required: 'true'
+                required: true
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'uuid',
-                index: 'true',
+                index: true,
                 default: 2
               },
               message: {
@@ -729,15 +730,15 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                required: 'true'
+                required: true
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'time',
-                index: 'true',
+                index: true,
                 default: 2
               },
               message: {
@@ -770,11 +771,11 @@ describe CreateStorageController do
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'integer',
-                index: 'true',
+                index: true,
                 default: 'hello' #default should be integer in this case but is not
               },
               message: {
@@ -807,11 +808,11 @@ describe CreateStorageController do
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'string',
-                index: 'true',
+                index: true,
                 default: 2 #default should be integer in this case but is not
               },
               message: {
@@ -844,7 +845,7 @@ describe CreateStorageController do
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'map',
@@ -880,7 +881,7 @@ describe CreateStorageController do
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'array',
@@ -916,7 +917,7 @@ describe CreateStorageController do
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'float',
@@ -952,7 +953,7 @@ describe CreateStorageController do
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'text',
@@ -988,11 +989,83 @@ describe CreateStorageController do
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'ip',
                 default: 2 #default should be integer in this case but is not
+              },
+              message: {
+                type: 'text',
+                default: 'mikel'
+              }
+            }
+          }
+
+
+          post_request '/api/v1/storage/create', payload.to_json, user
+
+          body = JSON.parse response.body
+
+          expect(response.status).to eql 400
+          expect(body.to_s).to include 'validation_error'
+          expect(body.to_s).to include 'structure'
+
+        end
+
+        it 'should err if structure -> default with type `map` values not string' do
+
+          payload = {
+            name: 'voyager',
+            key: 'logs',
+            structure: {
+              severity: {
+                type: 'integer',
+                default: 2
+              },
+              time: {
+                type: 'time',
+                required: true
+              },
+              desc: {
+                type: 'map',
+                default: {multi: {m: 's'}}
+              },
+              message: {
+                type: 'text',
+                default: 'mikel'
+              }
+            }
+          }
+
+
+          post_request '/api/v1/storage/create', payload.to_json, user
+
+          body = JSON.parse response.body
+
+          expect(response.status).to eql 400
+          expect(body.to_s).to include 'validation_error'
+          expect(body.to_s).to include 'structure'
+
+        end
+
+        it 'should err if structure -> default with type `array` values not string' do
+
+          payload = {
+            name: 'voyager',
+            key: 'logs',
+            structure: {
+              severity: {
+                type: 'integer',
+                default: 2
+              },
+              time: {
+                type: 'time',
+                required: true
+              },
+              desc: {
+                type: 'array',
+                default: ['stirng', 1]
               },
               message: {
                 type: 'text',
@@ -1021,20 +1094,20 @@ describe CreateStorageController do
           #   structure: {
           #     severity: {
           #       type: 'integer',
-          #       presence: 'true',
-          #       searchable: 'true'
+          #       presence: true,
+          #       searchable: true
           #     },
           #
           #     time: {
           #       type: 'integer',
-          #       presence: 'false',
-          #       searchable: 'true'
+          #       presence: false,
+          #       searchable: true
           #     },
           #
           #     message: {
           #       type: 'string',
-          #       presence: 'true',
-          #       searchable: 'true'
+          #       presence: true,
+          #       searchable: true
           #     }
           #   }
           # }
@@ -1064,12 +1137,12 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                required: 'true',
-                index: 'true'
+                required: true,
+                index: true
               },
               time: {
                 type: 'time',
-                required: 'true'
+                required: true
               },
               desc: {
                 type: 'text'

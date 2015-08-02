@@ -47,7 +47,7 @@ FactoryGirl.define do
     u.structure(
       {
         field:   {type: 'integer'},
-        field_2:   {type: 'integer', default: 2, index: 'true'}
+        field_2:   {type: 'integer', default: 2, index: true}
       }
     )
 

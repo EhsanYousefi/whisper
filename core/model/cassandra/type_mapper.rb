@@ -1,6 +1,6 @@
 module Cassandra
   module Custom
-    class Mapper
+    class TypeMapper
 
       VALID_TYPES = {
 
@@ -11,7 +11,7 @@ module Cassandra
         'array'     => 'array',
         'float'     => 'float',
         'time'      => 'timestamp',
-        'inet'      => 'inet',
+        'ip'      => 'inet',
         'uuid'      => 'uuid',
         'timeuuid'  => 'timeuuid'
 

@@ -32,7 +32,7 @@ class CreateColumnFamily
   def self.extract_column_names_and_types(structure)
 
     structure.map do |k,v|
-      "#{k} #{CassandraTypeMapper.get_type(v.to_h['type'])},"
+      "#{k} #{Cassandra::Custom::TypeMapper.get_type(v.to_h['type'])},"
     end.join('')
 
   end
