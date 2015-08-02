@@ -21,12 +21,17 @@ class Storage
 
   # ReImplement Structure Getter method
   def structure
-    @structure.to_json
+    if @structure.kind_of?(Hash)
+      @structure = @structure.to_json
+    else
+      @structure
+    end
   end
 
   private
 
   def validate_structure
+
     begin
       struct = JSON.parse self.structure
     rescue
@@ -34,7 +39,7 @@ class Storage
     end
 
     validator = StorageStructureValidator.new(struct)
-    binding.pry
+
     unless validator.valid?
       validator.errors.each do |err|
         errors.add(:structure, err)

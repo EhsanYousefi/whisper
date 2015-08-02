@@ -28,7 +28,7 @@ describe CreateStorageController do
 
       expect(Storage.all.first).to eql nil
 
-      expect(CreateColumnFamily).to receive :create_storage_successful
+      # expect(CreateColumnFamily).to receive :create_storage_successful
 
       payload = {
         name: 'voyager',
@@ -36,18 +36,19 @@ describe CreateStorageController do
         structure: {
           severity: {
             type: 'integer',
-            presence: 'true',
-            searchable: 'true'
+            required: 'true',
+            index: 'true'
           },
           time: {
-            type: 'integer',
-            presence: 'true',
-            searchable: 'true'
+            type: 'time',
+            required: 'true'
+          },
+          desc: {
+            type: 'text'
           },
           message: {
-            type: 'string',
-            presence: 'true',
-            searchable: 'true'
+            type: 'text',
+            default: 'mikel'
           }
         }
       }
@@ -55,7 +56,6 @@ describe CreateStorageController do
       post_request '/api/v1/storage/create', payload.to_json, user
 
       body = JSON.parse response.body
-      binding.pry
       expect(Storage.all.first).to_not eql nil
       expect(response.status).to eql 201
 
@@ -68,23 +68,24 @@ describe CreateStorageController do
         it 'should err if missing' do
 
           payload = {
+            # name: 'voyager',
             key: 'logs',
             structure: {
               severity: {
                 type: 'integer',
-                presence: 'true',
-                searchable: 'true'
+                required: 'true',
+                index: 'true'
               },
               time: {
-                type: 'integer',
-                presence: 'true',
-                searchable: 'true'
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'text'
               },
               message: {
-                type: 'string',
-                presence: 'true',
-                searchable: 'true'
-
+                type: 'text',
+                default: 'mikel'
               }
             }
           }
@@ -108,18 +109,19 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                presence: 'true',
-                searchable: 'true'
+                required: 'true',
+                index: 'true'
               },
               time: {
-                type: 'integer',
-                presence: 'true',
-                searchable: 'true'
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'text'
               },
               message: {
-                type: 'string',
-                presence: 'true',
-                searchable: 'true'
+                type: 'text',
+                default: 'mikel'
               }
             }
           }
@@ -139,25 +141,26 @@ describe CreateStorageController do
         it 'should err if invalid' do
 
           payload = {
-          name: '*invalid',
-          key: 'logs',
-          structure: {
-          severity: {
-          type: 'integer',
-          presence: 'true',
-          searchable: 'true'
-          },
-          time: {
-          type: 'integer',
-          presence: 'true',
-          searchable: 'true'
-          },
-          message: {
-          type: 'string',
-          presence: 'true',
-          searchable: 'true'
-          }
-          }
+            name: '*invalid',
+            key: 'logs',
+            structure: {
+              severity: {
+                type: 'integer',
+                required: 'true',
+                index: 'true'
+              },
+              time: {
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'text'
+              },
+              message: {
+                type: 'text',
+                default: 'mikel'
+              }
+            }
           }
 
           post_request '/api/v1/storage/create', payload.to_json, user
@@ -179,21 +182,23 @@ describe CreateStorageController do
 
           payload = {
             name: 'voyager',
+            # key: 'logs',
             structure: {
               severity: {
                 type: 'integer',
-                presence: 'true',
-                searchable: 'true'
+                required: 'true',
+                index: 'true'
               },
               time: {
-                type: 'integer',
-                presence: 'true',
-                searchable: 'true'
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'text'
               },
               message: {
-                type: 'string',
-                presence: 'true',
-                searchable: 'true'
+                type: 'text',
+                default: 'mikel'
               }
             }
           }
@@ -216,18 +221,19 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                presence: 'true',
-                searchable: 'true'
+                required: 'true',
+                index: 'true'
               },
               time: {
-                type: 'integer',
-                presence: 'true',
-                searchable: 'true'
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'text'
               },
               message: {
-                type: 'string',
-                presence: 'true',
-                searchable: 'true'
+                type: 'text',
+                default: 'mikel'
               }
             }
           }
@@ -245,25 +251,26 @@ describe CreateStorageController do
         it 'should err if invalid' do
 
           payload = {
-          name: 'voyager',
-          key: '%invalid',
-          structure: {
-          severity: {
-          type: 'integer',
-          presence: 'true',
-          searchable: 'true'
-          },
-          time: {
-          type: 'integer',
-          presence: 'true',
-          searchable: 'true'
-          },
-          message: {
-          type: 'string',
-          presence: 'true',
-          searchable: 'true'
-          }
-          }
+            name: 'voyager',
+            key: '#invalid',
+            structure: {
+              severity: {
+                type: 'integer',
+                required: 'true',
+                index: 'true'
+              },
+              time: {
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'text'
+              },
+              message: {
+                type: 'text',
+                default: 'mikel'
+              }
+            }
           }
 
           post_request '/api/v1/storage/create', payload.to_json, user
@@ -282,10 +289,29 @@ describe CreateStorageController do
 
         it 'should err if missing' do
 
-
           payload = {
             name: 'voyager',
             key: 'logs',
+            # structure: {
+            #   severity: {
+            #     type: 'integer',
+            #     required: 'true',
+            #     index: 'true',
+            #     default: 2
+            #   },
+            #   time: {
+            #     type: 'time',
+            #     required: 'true'
+            #   },
+            #   desc: {
+            #     type: 'text'
+            #   },
+            #   message: {
+            #     type: 'text',
+            #     required: 'true',
+            #     default: 'mikel'
+            #   }
+            # }
           }
 
           post_request '/api/v1/storage/create', payload.to_json, user
@@ -305,18 +331,20 @@ describe CreateStorageController do
             key: 'logs',
             structure: {
               severity: {
-                presence: 'true',
-                searchable: 'true'
+                # type: 'integer',
+                required: 'true',
+                index: 'true'
               },
               time: {
-                type: 'integer',
-                presence: 'true',
-                searchable: 'true'
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'text'
               },
               message: {
-                type: 'string',
-                presence: 'true',
-                searchable: 'true'
+                type: 'text',
+                default: 'mikel'
               }
             }
           }
@@ -338,19 +366,20 @@ describe CreateStorageController do
             key: 'logs',
             structure: {
               severity: {
-                type: 'integers',
-                presence: 'true',
-                searchable: 'true'
+                type: 'invalid',
+                required: 'true',
+                index: 'true'
               },
               time: {
-                type: 'integer',
-                presence: 'true',
-                searchable: 'true'
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'text'
               },
               message: {
-                type: 'string',
-                presence: 'true',
-                searchable: 'true'
+                type: 'invalid',
+                default: 'mikel'
               }
             }
           }
@@ -374,18 +403,19 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                presence: 'true',
-                searchable: 'true'
+                required: 'invalid',
+                index: 'true'
               },
               time: {
-                type: 'integer',
-                presence: 'sdfdsf',
-                searchable: 'true'
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'text'
               },
               message: {
-                type: 'string',
-                presence: 'true',
-                searchable: 'true'
+                type: 'text',
+                default: 'mikel'
               }
             }
           }
@@ -400,7 +430,7 @@ describe CreateStorageController do
 
         end
 
-        it 'should err if structure - > presence is missing' do
+        it 'should err if structure - > index is invalid' do
 
           payload = {
             name: 'voyager',
@@ -408,17 +438,19 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                searchable: 'true'
+                required: 'true',
+                index: 'invalid'
               },
               time: {
-                type: 'integer',
-                presence: 'true',
-                searchable: 'true'
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'text'
               },
               message: {
-                type: 'string',
-                presence: 'true',
-                searchable: 'true'
+                type: 'text',
+                default: 'mikel'
               }
             }
           }
@@ -433,7 +465,7 @@ describe CreateStorageController do
 
         end
 
-        it 'should err if structure - > searchable is missing' do
+        it 'should err if structure -> index used more than 1 time' do
 
           payload = {
             name: 'voyager',
@@ -441,17 +473,20 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                presence: 'true'
+                required: 'true',
+                index: 'true'
               },
               time: {
-                type: 'integer',
-                presence: 'true',
-                searchable: 'true'
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'string',
+                index: 'true'
               },
               message: {
-                type: 'string',
-                presence: 'true',
-                searchable: 'true'
+                type: 'text',
+                default: 'mikel'
               }
             }
           }
@@ -466,7 +501,7 @@ describe CreateStorageController do
 
         end
 
-        it 'should err if structure - > searchable is invalid' do
+        it 'should err if structure -> index used with text type' do
 
           payload = {
             name: 'voyager',
@@ -474,21 +509,23 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                presence: 'true',
-                searchable: 'invalid'
+                required: 'true'
               },
               time: {
-                type: 'integer',
-                presence: 'true',
-                searchable: 'true'
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'text',
+                index: 'true'
               },
               message: {
-                type: 'string',
-                presence: 'true',
-                searchable: 'true'
+                type: 'text',
+                default: 'mikel'
               }
             }
           }
+
 
           post_request '/api/v1/storage/create', payload.to_json, user
 
@@ -500,7 +537,7 @@ describe CreateStorageController do
 
         end
 
-        it 'should err if structure - > searchable == true and structure -> presence == false' do
+        it 'should err if structure -> index used with map type' do
 
           payload = {
             name: 'voyager',
@@ -508,23 +545,23 @@ describe CreateStorageController do
             structure: {
               severity: {
                 type: 'integer',
-                presence: 'true',
-                searchable: 'true'
+                required: 'true'
               },
-
               time: {
-                type: 'integer',
-                presence: 'false',
-                searchable: 'true'
+                type: 'time',
+                required: 'true'
               },
-
+              desc: {
+                type: 'map',
+                index: 'true'
+              },
               message: {
-                type: 'string',
-                presence: 'true',
-                searchable: 'true'
+                type: 'text',
+                default: 'mikel'
               }
             }
           }
+
 
           post_request '/api/v1/storage/create', payload.to_json, user
 
@@ -535,6 +572,482 @@ describe CreateStorageController do
           expect(body.to_s).to include 'structure'
 
         end
+
+        it 'should err if structure -> index used with array type' do
+
+          payload = {
+            name: 'voyager',
+            key: 'logs',
+            structure: {
+              severity: {
+                type: 'integer',
+                required: 'true'
+              },
+              time: {
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'array',
+                index: 'true'
+              },
+              message: {
+                type: 'text',
+                default: 'mikel'
+              }
+            }
+          }
+
+
+          post_request '/api/v1/storage/create', payload.to_json, user
+
+          body = JSON.parse response.body
+
+          expect(response.status).to eql 400
+          expect(body.to_s).to include 'validation_error'
+          expect(body.to_s).to include 'structure'
+
+        end
+
+        it 'should err if structure -> default used with required' do
+
+          payload = {
+            name: 'voyager',
+            key: 'logs',
+            structure: {
+              severity: {
+                type: 'integer',
+                required: 'true'
+              },
+              time: {
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'integer',
+                required: 'true',
+                index: 'true',
+                default: 2
+              },
+              message: {
+                type: 'text',
+                default: 'mikel'
+              }
+            }
+          }
+
+
+          post_request '/api/v1/storage/create', payload.to_json, user
+
+          body = JSON.parse response.body
+
+          expect(response.status).to eql 400
+          expect(body.to_s).to include 'validation_error'
+          expect(body.to_s).to include 'structure'
+
+        end
+
+        it 'should err if structure -> default used with `timeuuid` type' do
+
+          payload = {
+            name: 'voyager',
+            key: 'logs',
+            structure: {
+              severity: {
+                type: 'integer',
+                required: 'true'
+              },
+              time: {
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'timeuuid',
+                index: 'true',
+                default: 2
+              },
+              message: {
+                type: 'text',
+                default: 'mikel'
+              }
+            }
+          }
+
+
+          post_request '/api/v1/storage/create', payload.to_json, user
+
+          body = JSON.parse response.body
+
+          expect(response.status).to eql 400
+          expect(body.to_s).to include 'validation_error'
+          expect(body.to_s).to include 'structure'
+
+        end
+
+        it 'should err if structure -> default used with `uuid` type' do
+
+          payload = {
+            name: 'voyager',
+            key: 'logs',
+            structure: {
+              severity: {
+                type: 'integer',
+                required: 'true'
+              },
+              time: {
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'uuid',
+                index: 'true',
+                default: 2
+              },
+              message: {
+                type: 'text',
+                default: 'mikel'
+              }
+            }
+          }
+
+
+          post_request '/api/v1/storage/create', payload.to_json, user
+
+          body = JSON.parse response.body
+
+          expect(response.status).to eql 400
+          expect(body.to_s).to include 'validation_error'
+          expect(body.to_s).to include 'structure'
+
+        end
+
+        it 'should err if structure -> default used with `time` type' do
+
+          payload = {
+            name: 'voyager',
+            key: 'logs',
+            structure: {
+              severity: {
+                type: 'integer',
+                required: 'true'
+              },
+              time: {
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'time',
+                index: 'true',
+                default: 2
+              },
+              message: {
+                type: 'text',
+                default: 'mikel'
+              }
+            }
+          }
+
+
+          post_request '/api/v1/storage/create', payload.to_json, user
+
+          body = JSON.parse response.body
+
+          expect(response.status).to eql 400
+          expect(body.to_s).to include 'validation_error'
+          expect(body.to_s).to include 'structure'
+
+        end
+
+        it 'should err if structure -> default value type is not matched with structure -> type |integer, string|' do
+
+          payload = {
+            name: 'voyager',
+            key: 'logs',
+            structure: {
+              severity: {
+                type: 'integer',
+                default: 2
+              },
+              time: {
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'integer',
+                index: 'true',
+                default: 'hello' #default should be integer in this case but is not
+              },
+              message: {
+                type: 'text',
+                default: 'mikel'
+              }
+            }
+          }
+
+
+          post_request '/api/v1/storage/create', payload.to_json, user
+
+          body = JSON.parse response.body
+
+          expect(response.status).to eql 400
+          expect(body.to_s).to include 'validation_error'
+          expect(body.to_s).to include 'structure'
+
+        end
+
+        it 'should err if structure -> default value type is not matched with structure -> type |string, integer|' do
+
+          payload = {
+            name: 'voyager',
+            key: 'logs',
+            structure: {
+              severity: {
+                type: 'integer',
+                default: 2
+              },
+              time: {
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'string',
+                index: 'true',
+                default: 2 #default should be integer in this case but is not
+              },
+              message: {
+                type: 'text',
+                default: 'mikel'
+              }
+            }
+          }
+
+
+          post_request '/api/v1/storage/create', payload.to_json, user
+
+          body = JSON.parse response.body
+
+          expect(response.status).to eql 400
+          expect(body.to_s).to include 'validation_error'
+          expect(body.to_s).to include 'structure'
+
+        end
+
+        it 'should err if structure -> default value type is not matched with structure -> type |map, integer|' do
+
+          payload = {
+            name: 'voyager',
+            key: 'logs',
+            structure: {
+              severity: {
+                type: 'integer',
+                default: 2
+              },
+              time: {
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'map',
+                default: 2 #default should be integer in this case but is not
+              },
+              message: {
+                type: 'text',
+                default: 'mikel'
+              }
+            }
+          }
+
+
+          post_request '/api/v1/storage/create', payload.to_json, user
+
+          body = JSON.parse response.body
+
+          expect(response.status).to eql 400
+          expect(body.to_s).to include 'validation_error'
+          expect(body.to_s).to include 'structure'
+
+        end
+
+        it 'should err if structure -> default value type is not matched with structure -> type |array, integer|' do
+
+          payload = {
+            name: 'voyager',
+            key: 'logs',
+            structure: {
+              severity: {
+                type: 'integer',
+                default: 2
+              },
+              time: {
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'array',
+                default: 2 #default should be integer in this case but is not
+              },
+              message: {
+                type: 'text',
+                default: 'mikel'
+              }
+            }
+          }
+
+
+          post_request '/api/v1/storage/create', payload.to_json, user
+
+          body = JSON.parse response.body
+
+          expect(response.status).to eql 400
+          expect(body.to_s).to include 'validation_error'
+          expect(body.to_s).to include 'structure'
+
+        end
+
+        it 'should err if structure -> default value type is not matched with structure -> type |float, integer|' do
+
+          payload = {
+            name: 'voyager',
+            key: 'logs',
+            structure: {
+              severity: {
+                type: 'integer',
+                default: 2
+              },
+              time: {
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'float',
+                default: 2 #default should be integer in this case but is not
+              },
+              message: {
+                type: 'text',
+                default: 'mikel'
+              }
+            }
+          }
+
+
+          post_request '/api/v1/storage/create', payload.to_json, user
+
+          body = JSON.parse response.body
+
+          expect(response.status).to eql 400
+          expect(body.to_s).to include 'validation_error'
+          expect(body.to_s).to include 'structure'
+
+        end
+
+        it 'should err if structure -> default value type is not matched with structure -> type |text, integer|' do
+
+          payload = {
+            name: 'voyager',
+            key: 'logs',
+            structure: {
+              severity: {
+                type: 'integer',
+                default: 2
+              },
+              time: {
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'text',
+                default: 2 #default should be integer in this case but is not
+              },
+              message: {
+                type: 'text',
+                default: 'mikel'
+              }
+            }
+          }
+
+
+          post_request '/api/v1/storage/create', payload.to_json, user
+
+          body = JSON.parse response.body
+
+          expect(response.status).to eql 400
+          expect(body.to_s).to include 'validation_error'
+          expect(body.to_s).to include 'structure'
+
+        end
+
+        it 'should err if structure -> default value type is not matched with structure -> type |ip, integer|' do
+
+          payload = {
+            name: 'voyager',
+            key: 'logs',
+            structure: {
+              severity: {
+                type: 'integer',
+                default: 2
+              },
+              time: {
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'ip',
+                default: 2 #default should be integer in this case but is not
+              },
+              message: {
+                type: 'text',
+                default: 'mikel'
+              }
+            }
+          }
+
+
+          post_request '/api/v1/storage/create', payload.to_json, user
+
+          body = JSON.parse response.body
+
+          expect(response.status).to eql 400
+          expect(body.to_s).to include 'validation_error'
+          expect(body.to_s).to include 'structure'
+
+        end
+
+
+        # it 'should err if structure - > index == true and structure -> presence == false' do
+
+          # payload = {
+          #   name: 'voyager',
+          #   key: 'logs',
+          #   structure: {
+          #     severity: {
+          #       type: 'integer',
+          #       presence: 'true',
+          #       searchable: 'true'
+          #     },
+          #
+          #     time: {
+          #       type: 'integer',
+          #       presence: 'false',
+          #       searchable: 'true'
+          #     },
+          #
+          #     message: {
+          #       type: 'string',
+          #       presence: 'true',
+          #       searchable: 'true'
+          #     }
+          #   }
+          # }
+
+        #   post_request '/api/v1/storage/create', payload.to_json, user
+        #
+        #   body = JSON.parse response.body
+        #
+        #   expect(response.status).to eql 400
+        #   expect(body.to_s).to include 'validation_error'
+        #   expect(body.to_s).to include 'structure'
+        #
+        # end
 
       end
 
@@ -547,22 +1060,23 @@ describe CreateStorageController do
 
           payload = {
             name: user_storage.name,
-            key:  user_storage.key,
+            key: user_storage.key,
             structure: {
               severity: {
                 type: 'integer',
-                presence: 'true',
-                searchable: 'true'
+                required: 'true',
+                index: 'true'
               },
               time: {
-                type: 'integer',
-                presence: 'true',
-                searchable: 'true'
+                type: 'time',
+                required: 'true'
+              },
+              desc: {
+                type: 'text'
               },
               message: {
-                type: 'string',
-                presence: 'true',
-                searchable: 'true'
+                type: 'text',
+                default: 'mikel'
               }
             }
           }

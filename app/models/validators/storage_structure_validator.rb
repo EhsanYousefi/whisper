@@ -12,13 +12,14 @@ class StorageStructureValidator
   def valid?
 
     validate_mandatory_fields
-    validate_type               if errors.empty?
-    validate_required           if errors.empty?
-    validate_index              if errors.empty?
-    validate_index_with_type    if errors.empty?
-    validate_index_count        if errors.empty?
-    validate_default_with_type  if errors.empty?
-    validate_default            if errors.empty?
+    validate_type                   if errors.empty?
+    validate_required               if errors.empty?
+    validate_index                  if errors.empty?
+    validate_index_with_type        if errors.empty?
+    validate_index_count            if errors.empty?
+    validate_default_with_type      if errors.empty?
+    validate_default_with_required  if errors.empty?
+    validate_default                if errors.empty?
 
     errors.empty?
 
@@ -133,80 +134,134 @@ class StorageStructureValidator
 
   def validate_default_with_type
 
-    o = ''
-    validate = @struct.map do |s|
-      o = h.last.to_h
-      if o['default'] != nil and !Cassandra::Custom::Defaults.include?(o['type'])
+    o = nil
+    validate = @struct.map do |k,v|
+      if v['default'] != nil and !Cassandra::Custom::Defaults.include?(v['type'])
+        o = v['type']
         false
       else
         true
       end
     end
 
-    errors << "structure -> `default` could not be used with `#{o['type']}` type" if validate.include? false
+    errors << "structure -> `default` could not be used with `#{o}` type" if validate.include? false
 
   end
 
+  def validate_default_with_required
+
+    validate = @struct.map do |k,v|
+      if v['default'] and v['required'] == 'true'
+        false
+      else
+        true
+      end
+    end
+
+    errors << "structure -> `default` could not be used with `required: 'true'`" if validate.include? false
+
+  end
+
+
   def validate_default
 
-    validate = @struct.map do |s|
-      o = h.last.to_h
+    validate = @struct.map do |k,v|
 
-      if o['default']
+      if v['default']
 
-        return send("validate_default_type_#{o['type']}", o['default'])
+        send("validate_default_type_#{v['type']}", v['default'])
 
       end
 
 
-      o = h.last.to_h
-      !o['default'].nil? and o['default'].kind_of? Cassandra::Custom::Mapper.get_type(o['type'])
+      # !v['default'].nil? and o['default'].kind_of? Cassandra::Custom::Mapper.get_type(v['type'])
     end
 
-    errors << "structure -> `default` could not be matched with `type`" if validate.include? false
+    errors << "structure -> `default` could be matched with `type`" if validate.include? false
 
   end
 
   def validate_default_type_map(val)
-    return errors << "structure -> `default` could not be matched with `type`" unless val.kind_of?(Hash)
+    return errors << "structure -> `default` could be matched with `type`" unless val.kind_of?(Hash)
 
     validate = val.map do |k,v|
       return false unless v.kind_of?(String) # We only accept Map with this condition Map<text, text>
       true
     end
 
-    errors << "structure -> `default` with `map` type could be string in both directions like: {'key': 'value' }" if validate.include?(false)
+    if validate.include?(false)
+      errors << "structure -> `default` with `map` type could be string in both directions like: {'key': 'value' }"
+      return false
+    else
+      true
+    end
+
   end
 
   def validate_default_type_array(val)
 
-    return errors << "structure -> `default` could be matched with `type`" unless val.kind_of?(Array)
+    unless val.kind_of?(Array)
+      errors << "structure -> `default` could be matched with `type`"
+      return false
+    end
 
     validate = val.map do |k,v|
       return false unless v.kind_of?(String) # We only accept Map with this condition Map<text, text>
       true
     end
 
-    errors << "structure -> `default` with `array` type could only contain string like: ['string', 'string']" if validate.include?(false)
+    if validate.include?(false)
+      errors << "structure -> `default` with `array` type could only contain string like: ['string', 'string']"
+      return false
+    else
+      true
+    end
 
   end
 
   def validate_default_type_string(val)
-    errors << "structure -> `default` with `string` type could be string but is not" unless val.kind_of?(String)
+    unless val.kind_of?(String)
+      errors << "structure -> `default` with `string` type could be string but is not"
+      return false
+    else
+      true
+    end
   end
 
   def validate_default_type_text(val)
-    errors << "structure -> `default` with `text` type could be string but is not" unless val.kind_of?(String)
+    unless val.kind_of?(String)
+      errors << "structure -> `default` with `text` type could be string but is not"
+      return false
+    else
+      true
+    end
   end
 
   def validate_default_type_integer(val)
-    errors << "structure -> `default` with `integer` type could be integer but is not" unless val.kind_of?(Integer)
+    unless val.kind_of?(Integer)
+      errors << "structure -> `default` with `integer` type could be integer but is not"
+      return false
+    else
+      true
+    end
+  end
+
+  def validate_default_type_float(val)
+    unless val.kind_of?(Float)
+      errors << "structure -> `default` with `float` type could be float but is not"
+      return false
+    else
+      true
+    end
   end
 
   def validate_default_type_ip(val)
     begin
       IPAddr.new val
+    rescue
+      errors << "structure -> `default` with `ip` type have invalid value"
+      return false
     end
-    errors << "structure -> `default` with `ip` type have invalid value"
+    true
   end
 end

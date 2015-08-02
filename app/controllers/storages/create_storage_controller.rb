@@ -3,15 +3,20 @@ class CreateStorageController < ApplicationController
   before_start :authorized?
 
   def main
-    
+
     create_storage = CreateStorage.new
 
-    create_storage.subscribe(CreateColumnFamily)
+    # create_storage.subscribe(CreateColumnFamily)
 
     create_storage.on(:create_storage_successful) do |storage|
 
       app.status 201
-      return app.json storage.as_json
+      
+      return app.json(
+        name: storage.name,
+        key: storage.key,
+        structure: JSON.parse(storage.structure)
+      )
 
     end
 

@@ -46,8 +46,8 @@ FactoryGirl.define do
 
     u.structure(
       {
-        field:   Cassandra::UDT.new(type: 'string', presence: 'true', searchable: 'true'),
-        field_1: Cassandra::UDT.new(type: 'integer', presence: 'true', searchable: 'true')
+        field:   {type: 'integer'},
+        field_2:   {type: 'integer', default: 2, index: 'true'}
       }
     )
 

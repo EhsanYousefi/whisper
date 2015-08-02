@@ -12,7 +12,7 @@ module Cassandra
             return Cassandra::Types::Inet.new(obj)
           when type == Time
             return Cassandra::Types::Timestamp.new(obj)
-          when type == Timeuuid
+          when type == TimeUuid
             return Cassandra::Uuid::Generator.new.now
           when type == Uuid
             return Cassandra::Uuid::Generator.new.uuid

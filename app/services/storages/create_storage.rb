@@ -27,7 +27,7 @@ class CreateStorage
 
   def fix_cassandra_udt(hash)
     return unless hash
-    
+
     new_hash = {}
 
     hash.each do |k,v|
