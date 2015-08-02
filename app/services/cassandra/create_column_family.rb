@@ -24,8 +24,9 @@ class CreateColumnFamily
 
   def self.prepare_storage(storage)
     storage = storage.to_h
-    storage['structure']['created_at'] = { type: 'integer' }
-    storage['structure']['id'] = { type: 'timeuuid' }
+    structure = JSON.parse(storage['structure'])
+    structure['ca'] = { type: 'integer' }
+    structure['id'] = { type: 'timeuuid' }
     storage
   end
 
@@ -46,7 +47,7 @@ class CreateColumnFamily
   end
 
   def self.prepare_primary_key
-    "PRIMARY KEY ((created_at), id)"
+    'PRIMARY KEY ((ca), id)'
   end
 
   def self.prepare_table_info(columns, primary_key)

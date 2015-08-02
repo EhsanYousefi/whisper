@@ -6,6 +6,7 @@ class Storage
   user_name:          String,
   name:               String,
   key:                String,
+  sort:               String,
   column_family_name: String,
   structure:          String
   )
@@ -13,6 +14,7 @@ class Storage
   validates :user_name,   presence: true, format: { without: /\W/, message: 'is incorrect' }, uniq_with: [:name, :key]
   validates :name,        presence: true, format: { without: /\W/, message: 'is incorrect' }
   validates :key,         presence: true, format: { without: /\W/, message: 'is incorrect' }
+  validates :sort,        presence: true, inclusion: { in: %w(asc desc), message: "%{value} is not valid sort type" }
   validates :column_family_name, presence: true
 
   validate  :validate_structure

@@ -11,10 +11,11 @@ class CreateStorageController < ApplicationController
     create_storage.on(:create_storage_successful) do |storage|
 
       app.status 201
-      
+
       return app.json(
         name: storage.name,
         key: storage.key,
+        sort: storage.sort,
         structure: JSON.parse(storage.structure)
       )
 

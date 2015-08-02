@@ -33,6 +33,7 @@ describe CreateStorageController do
       payload = {
         name: 'voyager',
         key: 'logs',
+        sort: 'asc',
         structure: {
           severity: {
             type: 'integer',
@@ -71,6 +72,7 @@ describe CreateStorageController do
           payload = {
             # name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -107,6 +109,7 @@ describe CreateStorageController do
           payload = {
             name: '',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -144,6 +147,7 @@ describe CreateStorageController do
           payload = {
             name: '*invalid',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -184,6 +188,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             # key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -219,6 +224,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: '',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -254,6 +260,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: '#invalid',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -286,6 +293,82 @@ describe CreateStorageController do
 
       end
 
+      context :sort do
+
+        it 'should err if missing' do
+
+          payload = {
+            name: 'voyager',
+            key: 'users',
+            # sort: 'asc',
+            structure: {
+              severity: {
+                type: 'integer',
+                required: true,
+                index: true
+              },
+              time: {
+                type: 'time',
+                required: true
+              },
+              desc: {
+                type: 'text'
+              },
+              message: {
+                type: 'text',
+                default: 'mikel'
+              }
+            }
+          }
+
+          post_request '/api/v1/storage/create', payload.to_json, user
+
+          body = JSON.parse response.body
+
+          expect(response.status).to eql 400
+          expect(body.to_s).to include 'validation_error'
+          expect(body.to_s).to include 'sort'
+
+        end
+
+        it 'should err if value is not asc|desc' do
+
+          payload = {
+            name: 'voyager',
+            key: 'users',
+            sort: 'invalid',
+            structure: {
+              severity: {
+                type: 'integer',
+                required: true,
+                index: true
+              },
+              time: {
+                type: 'time',
+                required: true
+              },
+              desc: {
+                type: 'text'
+              },
+              message: {
+                type: 'text',
+                default: 'mikel'
+              }
+            }
+          }
+
+          post_request '/api/v1/storage/create', payload.to_json, user
+
+          body = JSON.parse response.body
+
+          expect(response.status).to eql 400
+          expect(body.to_s).to include 'validation_error'
+          expect(body.to_s).to include 'sort'
+
+        end
+
+      end
+
       context :structure do
 
         it 'should err if missing' do
@@ -293,6 +376,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             # structure: {
             #   severity: {
             #     type: 'integer',
@@ -330,6 +414,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 # type: 'integer',
@@ -365,6 +450,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'invalid',
@@ -401,6 +487,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -436,6 +523,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -471,6 +559,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -507,6 +596,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -543,6 +633,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -579,6 +670,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -615,6 +707,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -653,6 +746,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -690,6 +784,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -727,6 +822,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -764,6 +860,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -801,6 +898,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -838,6 +936,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -874,6 +973,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -910,6 +1010,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -946,6 +1047,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -982,6 +1084,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -1018,6 +1121,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -1054,6 +1158,7 @@ describe CreateStorageController do
           payload = {
             name: 'voyager',
             key: 'logs',
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',
@@ -1134,6 +1239,7 @@ describe CreateStorageController do
           payload = {
             name: user_storage.name,
             key: user_storage.key,
+            sort: 'asc',
             structure: {
               severity: {
                 type: 'integer',

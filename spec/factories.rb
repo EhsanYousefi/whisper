@@ -41,6 +41,7 @@ FactoryGirl.define do
     u.sequence :key do |k|
       "key#{k}"
     end
+    u.sort 'desc'
 
     u.column_family_name 'test_column_family_name'
 
