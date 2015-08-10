@@ -6,7 +6,7 @@ class CreateStorageController < ApplicationController
 
     create_storage = CreateStorage.new
 
-    # create_storage.subscribe(CreateColumnFamily)
+    create_storage.subscribe(CreateColumnFamily)
 
     create_storage.on(:create_storage_successful) do |storage|
 

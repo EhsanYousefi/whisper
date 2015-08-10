@@ -2,12 +2,30 @@ module Cassandra::Persistence
 
   def create
     return false unless valid? || persisted?
+
+    # Serialize Data Before Insert
+    Cassandra::Custom::Serializer.new(:create, self).serialize
     hash = self.to_h.compact
-    
+
     begin
-      # Serialize Data Before Insert
-      Cassandra::Custom::Serializer.new(self).serialize
       self.class.insert_query(self.send(:database), self.class.column_family_name, hash.stringify_keys)
+      changes_applied; persist!
+      true
+    rescue
+      false
+    end
+
+  end
+
+  def create_async
+    return false unless valid? || persisted?
+
+    # Serialize Data Before Insert
+    Cassandra::Custom::Serializer.new(:create, self).serialize
+    hash = self.to_h.compact
+
+    begin
+      self.class.insert_query_async(self.send(:database), self.class.column_family_name, hash.stringify_keys)
       changes_applied; persist!
       true
     rescue
@@ -18,10 +36,23 @@ module Cassandra::Persistence
 
   def create!
     return false unless valid? || persisted?
-    hash = self.to_h.compact
 
     # Serialize Data Before Insert
-    Cassandra::Custom::Serializer.new(self).serialize
+    Cassandra::Custom::Serializer.new(:create, self).serialize
+    hash = self.to_h.compact
+
+    self.class.insert_query_async(self.send(:database), self.class.column_family_name, hash.stringify_keys)
+
+    changes_applied; persist!
+    true
+  end
+
+  def create!
+    return false unless valid? || persisted?
+
+    # Serialize Data Before Insert
+    Cassandra::Custom::Serializer.new(:create, self).serialize
+    hash = self.to_h.compact
 
     self.class.insert_query(self.send(:database), self.class.column_family_name, hash.stringify_keys)
 
@@ -34,6 +65,7 @@ module Cassandra::Persistence
 
     data = {}
 
+    Cassandra::Custom::Serializer.new(:update, self).serialize
     self.changes.map do |k, v|
       data[k] = v
     end
@@ -52,6 +84,7 @@ module Cassandra::Persistence
 
     data = {}
 
+    Cassandra::Custom::Serializer.new(:update, self).serialize
     self.changes.map do |k, v|
       data[k] = v
     end

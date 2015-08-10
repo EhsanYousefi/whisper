@@ -11,19 +11,21 @@ describe CreateUserController do
     it 'should register an user' do
 
       payload = {
-      user_name: 'ehsan_yousefi',
-      email: 'e.yousefi@roundtableapps.com',
-      password: 'jackjack',
-      password_confirmation: 'jackjack',
-      first_name: 'Ehsan',
-      last_name: 'Yousefi',
-      company: 'RoundTableApps'
+        user: {
+          user_name: 'ehsan_yousefi',
+          email: 'e.yousefi@roundtableapps.com',
+          password: 'jackjack',
+          password_confirmation: 'jackjack',
+          first_name: 'Ehsan',
+          last_name: 'Yousefi',
+          company: 'RoundTableApps'
+        }
       }
 
       post_request '/api/v1/users', payload.to_json
 
       body = JSON.parse response.body
-
+      binding.pry
       expect(response.status).to eql 201
 
 
@@ -55,7 +57,7 @@ describe CreateUserController do
 
           body = JSON.parse response.body
 
-          expect(response.status).to eql 400
+          expect(response.status).to eql 422
           expect(body['errors']).to_not eql nil
 
         end
@@ -76,7 +78,7 @@ describe CreateUserController do
 
           body = JSON.parse response.body
 
-          expect(response.status).to eql 400
+          expect(response.status).to eql 422
           expect(body['errors']).to_not eql nil
 
         end
@@ -97,7 +99,7 @@ describe CreateUserController do
 
           body = JSON.parse response.body
 
-          expect(response.status).to eql 400
+          expect(response.status).to eql 422
           expect(body['errors']).to_not eql nil
 
         end
@@ -122,7 +124,7 @@ describe CreateUserController do
 
           body = JSON.parse response.body
 
-          expect(response.status).to eql 400
+          expect(response.status).to eql 422
           expect(body['errors']).to_not eql nil
 
         end
@@ -143,7 +145,7 @@ describe CreateUserController do
 
           body = JSON.parse response.body
 
-          expect(response.status).to eql 400
+          expect(response.status).to eql 422
           expect(body['errors']).to_not eql nil
 
         end
@@ -164,7 +166,7 @@ describe CreateUserController do
 
           body = JSON.parse response.body
 
-          expect(response.status).to eql 400
+          expect(response.status).to eql 422
           expect(body['errors']).to_not eql nil
 
         end
@@ -189,7 +191,7 @@ describe CreateUserController do
 
           body = JSON.parse response.body
 
-          expect(response.status).to eql 400
+          expect(response.status).to eql 422
           expect(body['errors']).to_not eql nil
 
         end
@@ -210,7 +212,7 @@ describe CreateUserController do
 
           body = JSON.parse response.body
 
-          expect(response.status).to eql 400
+          expect(response.status).to eql 422
           expect(body['errors']).to_not eql nil
 
         end
@@ -235,7 +237,7 @@ describe CreateUserController do
 
           body = JSON.parse response.body
 
-          expect(response.status).to eql 400
+          expect(response.status).to eql 422
           expect(body['errors']).to_not eql nil
 
         end
@@ -256,7 +258,7 @@ describe CreateUserController do
 
           body = JSON.parse response.body
 
-          expect(response.status).to eql 400
+          expect(response.status).to eql 422
           expect(body['errors']).to_not eql nil
 
         end
@@ -281,7 +283,7 @@ describe CreateUserController do
 
           body = JSON.parse response.body
 
-          expect(response.status).to eql 400
+          expect(response.status).to eql 422
           expect(body['errors']).to_not eql nil
 
         end
@@ -302,7 +304,7 @@ describe CreateUserController do
 
           body = JSON.parse response.body
 
-          expect(response.status).to eql 400
+          expect(response.status).to eql 422
           expect(body['errors']).to_not eql nil
 
         end

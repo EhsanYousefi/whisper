@@ -2,7 +2,7 @@ class CreateUser
   include Wisper::Publisher
 
   def execute(attributes)
-
+    attributes = attributes[:user] || {}
     # Prevent From Mass Assignment
     user = User.new(
       user_name:              attributes[:user_name],

@@ -10,6 +10,8 @@ module Schema
             name text,
             key text,
             sort text,
+            sort_by text,
+            pattern text,
             column_family_name text,
             structure text,
             PRIMARY KEY (user_name, name, key)

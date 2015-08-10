@@ -31,7 +31,7 @@ class StoreController < ApplicationController
     store.on(:store_on_storage_successful) do |store|
 
       app.status 201
-      return app.json id: store.id.to_s
+      return app.json id: "#{store.ca}_#{store.id}"
 
     end
 

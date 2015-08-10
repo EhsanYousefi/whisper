@@ -5,13 +5,14 @@ body {
   width: 100%;
   height: 100%;
   background-attachment: fixed;
+  background-color: #FFFFFF;
 }
 .without-radius {
   -webkit-border-radius: 0px!important;
   -moz-border-radius: 0px!important;
   border-radius: 0px!important;
 }
-.full-width {
+#full-width {
   width: 100%!important;
 }
 .righ-text {
@@ -36,15 +37,109 @@ body {
   padding: auto 20%;
   margin: 0 auto;
 }
-#loginPage #loginForm, #signUpPage #signUpForm {
+/*#loginPage #loginForm, #signUpPage #signUpForm {
   background-color: #eeeff1;
+}*/
+.ui.input input, textarea {
+  /*border-color: #FFF!important;*/
+  border: none!important;
 }
-.ui.input input {
-  border-color: #e8e8e8!important;
+.ui.label {
+  background-color: #FFF;
+  border-right: 1px solid #F6F6F6;
 }
 #topMenu {
-  background-color: #EFEFEF;
+  background-color: #178BDE;
+  margin-bottom: 20px;
 }
 .ui.label.icon {
   width: 36px;
+}
+.errField {
+  color: #9f3a38;
+  list-style: none;
+  text-align: right;
+  margin-top: -10px;
+  margin-bottom: 5px;
+}
+.ui.form .field {
+  margin: 0em 0em 1em;
+}
+.form .field:last-child, .form .fields:last-child .field {
+  margin-bottom: 1em!important;
+}
+
+#sidebar {
+  background-color: #178BDE;
+  width: 100px;
+  top: 53px;
+}
+.ui.visible.left.sidebar ~ .fixed, .ui.visible.left.sidebar ~ .pusher {
+    -webkit-transform: translate3d(120px, 0, 0);
+    transform: translate3d(120px, 0, 0);
+}
+.pusher {
+  margin-right: 140px;
+}
+.candy {
+  background-color: #fafafa!important;
+}
+.liquid-container
+{
+    transform: initial;
+}
+.ui.header > .icon + .content {
+  color: #2B82C8;
+}
+.ui.dimmer {
+  background-color: transparent;
+}
+.close-modal {
+  float: right;
+  cursor: pointer!important;
+  margin-top: -20px!important;
+  margin-right: -24px!important;
+}
+
+.ui.modal > .header:not(.ui) {
+  border-bottom: 1px solid #ddd;
+  padding: 1.142rem 1.7142rem;
+  background-color: #F6F6F6;
+}
+.ui.modal > .actions {
+  border-top: 1px solid #ddd;
+  background-color: #F6F6F6;
+}
+.ui.modal {
+  border: 1px solid #ddd;
+  box-shadow: none;
+}
+.ui.very-small.modal {
+  max-width: 420px;
+  min-width: 320px;
+  margin: 0em 0em 0em -166px;
+}
+#wrapper {
+  margin-top: 60px;
+}
+.custom-accordion .title {
+  color: #6B6B6B!important;
+  background-color: #AAA;
+  margin-bottom: 12px!important;
+  padding: 10px!important;
+  border-left: 4px solid #178BDE;
+}
+.ui.storage-list.shape {
+  margin-bottom: 20px;
+  margin-right: 1px;
+  margin-left: 1px;
+}
+.description::first-letter {
+   text-transform:uppercase;
+}
+.header {
+  text-transform: capitalize;
+}
+.message {
+  margin: 15px 0!important;
 }

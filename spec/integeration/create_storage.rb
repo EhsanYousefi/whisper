@@ -28,7 +28,7 @@ describe CreateStorageController do
 
       expect(Storage.all.first).to eql nil
 
-      # expect(CreateColumnFamily).to receive :create_storage_successful
+      expect(CreateColumnFamily).to receive :create_storage_successful
 
       payload = {
         name: 'voyager',
@@ -44,7 +44,7 @@ describe CreateStorageController do
             type: 'time',
             required: true
           },
-          desc: {
+          description: {
             type: 'text'
           },
           message: {
@@ -57,13 +57,61 @@ describe CreateStorageController do
       post_request '/api/v1/storage/create', payload.to_json, user
 
       body = JSON.parse response.body
-
+      
       expect(Storage.all.first).to_not eql nil
       expect(response.status).to eql 201
+
+      # # Make Sure Database Is Cleaned
+      # begin
+      #   App.database.execute("DROP TABLE #{Storage.all.first.column_family_name}");
+      # rescue
+      #   true
+      # end
 
     end
 
     context :failuers do
+
+      context :reserved_words do
+
+        it 'should err if structure column family name is reserved by cassandra' do
+
+          payload = {
+            name: 'voyager',
+            key: 'logs',
+            sort: 'asc',
+            structure: {
+              severity: {
+                type: 'integer',
+                required: true,
+                index: true
+              },
+              time: {
+                type: 'time',
+                required: true
+              },
+              where: {
+                type: 'text'
+              },
+              message: {
+                type: 'text',
+                default: 'mikel'
+              }
+            }
+          }
+
+          post_request '/api/v1/storage/create', payload.to_json, user
+
+          body = JSON.parse response.body
+
+          expect(Storage.all.first).to eql nil
+          expect(response.status).to eql 400
+          expect(body.to_s).to include 'validation_error'
+          expect(body.to_s).to include 'reserved'
+
+        end
+
+      end
 
       context :name do
 
@@ -83,7 +131,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'text'
               },
               message: {
@@ -120,7 +168,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'text'
               },
               message: {
@@ -158,7 +206,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'text'
               },
               message: {
@@ -199,7 +247,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'text'
               },
               message: {
@@ -235,7 +283,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'text'
               },
               message: {
@@ -271,7 +319,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'text'
               },
               message: {
@@ -311,7 +359,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'text'
               },
               message: {
@@ -347,7 +395,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'text'
               },
               message: {
@@ -388,7 +436,7 @@ describe CreateStorageController do
             #     type: 'time',
             #     required: true
             #   },
-            #   desc: {
+            #   description: {
             #     type: 'text'
             #   },
             #   message: {
@@ -425,7 +473,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'text'
               },
               message: {
@@ -461,7 +509,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'text'
               },
               message: {
@@ -498,7 +546,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'text'
               },
               message: {
@@ -534,7 +582,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'text'
               },
               message: {
@@ -570,7 +618,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'string',
                 index: true
               },
@@ -606,7 +654,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'text',
                 index: true
               },
@@ -643,7 +691,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'map',
                 index: true
               },
@@ -680,7 +728,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'array',
                 index: true
               },
@@ -717,7 +765,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'integer',
                 required: true,
                 index: true,
@@ -756,8 +804,8 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
-                type: 'timeuuid',
+              description: {
+                type: 'time_uuid',
                 index: true,
                 default: 2
               },
@@ -794,7 +842,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'uuid',
                 index: true,
                 default: 2
@@ -832,7 +880,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'time',
                 index: true,
                 default: 2
@@ -870,7 +918,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'integer',
                 index: true,
                 default: 'hello' #default should be integer in this case but is not
@@ -908,7 +956,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'string',
                 index: true,
                 default: 2 #default should be integer in this case but is not
@@ -946,7 +994,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'map',
                 default: 2 #default should be integer in this case but is not
               },
@@ -983,7 +1031,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'array',
                 default: 2 #default should be integer in this case but is not
               },
@@ -1020,7 +1068,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'float',
                 default: 2 #default should be integer in this case but is not
               },
@@ -1057,7 +1105,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'text',
                 default: 2 #default should be integer in this case but is not
               },
@@ -1094,7 +1142,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'ip',
                 default: 2 #default should be integer in this case but is not
               },
@@ -1131,7 +1179,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'map',
                 default: {multi: {m: 's'}}
               },
@@ -1168,7 +1216,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'array',
                 default: ['stirng', 1]
               },
@@ -1250,7 +1298,7 @@ describe CreateStorageController do
                 type: 'time',
                 required: true
               },
-              desc: {
+              description: {
                 type: 'text'
               },
               message: {

@@ -45,27 +45,27 @@ describe StoreController do
     payload = {
       name: 'whisper',
       key: 'logs',
+      sort: 'desc',
       structure: {
         severity: {
           type: 'integer',
-          presence: 'true',
-          searchable: 'true'
+          index: true,
+          default: 2
         },
         time: {
           type: 'time',
-          presence: 'false',
-          searchable: 'false'
+          required: false,
+          index: false
         },
         message: {
           type: 'string',
-          presence: 'true',
-          searchable: 'false'
+          required: true,
+          index: false
         },
       },
     }.to_json
 
     post_request '/api/v1/storage/create', payload, user
-
   end
 
   let :column_family_name do
@@ -81,7 +81,34 @@ describe StoreController do
         storage: 'whisper',
         key: 'logs',
         data: {
+          # severity: 2,
           severity: 2,
+          time: Time.now.to_i,
+          message: "Hello world this is my first log message"
+        },
+      }.to_json
+      puts Time.now.to_f
+      100.times do
+        post_request '/api/v1/storage/store', payload, user
+      end
+      puts Time.now.to_f
+      binding.pry
+      body = JSON.parse response.body
+
+      expect(body['id']).to_not eql nil
+      expect(response.status).to eql 201
+
+    end
+
+    it 'should ok if severity is missing(because of default value)' do
+
+      user_storage
+
+      payload = {
+        storage: 'whisper',
+        key: 'logs',
+        data: {
+          # severity: 2,
           time: Time.now.to_i,
           message: "Hello world this is my first log message"
         },
@@ -91,7 +118,28 @@ describe StoreController do
 
       body = JSON.parse response.body
 
-      expect(body['id']).to_not eql nil
+      expect(response.status).to eql 201
+
+    end
+
+    it 'should ok if severity is null(because of default value)' do
+
+      user_storage
+
+      payload = {
+        storage: 'whisper',
+        key: 'logs',
+        data: {
+          severity: nil,
+          time: Time.now.to_s,
+          message: "Hello world this is my first log message"
+        },
+      }.to_json
+
+      post_request '/api/v1/storage/store', payload, user
+
+      body = JSON.parse response.body
+
       expect(response.status).to eql 201
 
     end
@@ -311,7 +359,7 @@ describe StoreController do
 
           body = JSON.parse response.body
 
-          expect(body['error']).to_not eql nil
+          expect(body['validation_error']).to_not eql nil
           expect(response.status).to eql 400
 
         end
@@ -342,29 +390,6 @@ describe StoreController do
 
         context :severity do
 
-          it 'should err if severity is missing' do
-
-            user_storage
-
-            payload = {
-              storage: 'whisper',
-              key: 'logs',
-              data: {
-                # severity: 2,
-                time: Time.now.to_i,
-                message: "Hello world this is my first log message"
-              },
-            }.to_json
-
-            post_request '/api/v1/storage/store', payload, user
-
-            body = JSON.parse response.body
-
-            expect(body['validation_error']).to_not eql nil
-            expect(response.status).to eql 400
-
-          end
-
           it 'should err if severity is not integer' do
 
             user_storage
@@ -375,29 +400,6 @@ describe StoreController do
               data: {
                 severity: '2', # String
                 time: Time.now.to_i,
-                message: "Hello world this is my first log message"
-              },
-            }.to_json
-
-            post_request '/api/v1/storage/store', payload, user
-
-            body = JSON.parse response.body
-
-            expect(body['validation_error']).to_not eql nil
-            expect(response.status).to eql 400
-
-          end
-
-          it 'should err if severity is nil;' do
-
-            user_storage
-
-            payload = {
-              storage: 'whisper',
-              key: 'logs',
-              data: {
-                severity: nil,
-                time: Time.now.to_s,
                 message: "Hello world this is my first log message"
               },
             }.to_json

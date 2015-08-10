@@ -3,23 +3,23 @@ class Storage
   include Cassandra::ColumnFamily
 
   columns(
-  user_name:          String,
-  name:               String,
-  key:                String,
-  sort:               String,
-  column_family_name: String,
-  structure:          String
+    user_name:          { type: String },
+    name:               { type: String },
+    key:                { type: String },
+    sort:               { type: String },
+    pattern:            { type: String },
+    column_family_name: { type: String },
+    structure:          { type: String }
   )
 
-  validates :user_name,   presence: true, format: { without: /\W/, message: 'is incorrect' }, uniq_with: [:name, :key]
-  validates :name,        presence: true, format: { without: /\W/, message: 'is incorrect' }
-  validates :key,         presence: true, format: { without: /\W/, message: 'is incorrect' }
-  validates :sort,        presence: true, inclusion: { in: %w(asc desc), message: "%{value} is not valid sort type" }
-  validates :column_family_name, presence: true
+  validates :user_name,           presence: true, format: { without: /\W/, message: 'is incorrect' }, uniq_with: [:name, :key]
+  validates :name,                presence: true, format: { without: /\W/, message: 'is incorrect' }
+  validates :key,                 presence: true, format: { without: /\W/, message: 'is incorrect' }
+  validates :sort,                presence: true, inclusion: { in: %w(asc desc), message: "%{value} is not valid sort type" }
+  validates :pattern,             presence: true, inclusion: { in: %w(time_series counter), message: "%{value} is not valid pattern" }
+  validates :column_family_name,  presence: true
 
   validate  :validate_structure
-
-  VALID_TYPES = ['String', 'Integer', 'Float', 'Time']
 
   # ReImplement Structure Getter method
   def structure
@@ -40,13 +40,21 @@ class Storage
       return errors.add(:structure, "should be json object")
     end
 
-    validator = StorageStructureValidator.new(struct)
+    begin
 
-    unless validator.valid?
-      validator.errors.each do |err|
-        errors.add(:structure, err)
+      validator = "StorageStructure::#{self.pattern.classify.constantize}".new(struct)
+
+      unless validator.valid?
+        validator.errors.each do |err|
+          errors.add(:structure, err)
+        end
       end
+
+
+    rescue
+      false
     end
+
 
   end
 

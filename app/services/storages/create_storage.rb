@@ -8,13 +8,14 @@ class CreateStorage
       name:                   attributes[:name],
       key:                    attributes[:key],
       sort:                   attributes[:sort],
-      structure:              attributes[:structure],
+      structure:              preapre_structure(attributes[:structure]),
+      pattern:                attributes[:pattern],
       column_family_name: (
       (
         (attributes[:user_name] + '_' + attributes[:name] + '_' + attributes[:key])
       ) if attributes[:user_name] && attributes[:name] && attributes[:key] )
     )
-    
+
     if storage.create
       broadcast(:create_storage_successful, storage)
     else
@@ -22,5 +23,14 @@ class CreateStorage
     end
 
   end
+
+  private
+  def preapre_structure(structure)
+    return unless structure
+    structure['ca'] = { type: 'sexy_date' } # ca will be our primary key
+    structure['id'] = { type: 'time_uuid' } # timeuuid will be our clustering key
+    structure
+  end
+
 
 end

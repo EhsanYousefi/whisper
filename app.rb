@@ -6,7 +6,7 @@ class App < Sinatra::Base
   include Core::Database
 
   options '/*' do
-    response["Access-Control-Allow-Headers"] = "origin, x-requested-with, content-type"
+    response["Access-Control-Allow-Headers"] = "origin, x-requested-with, content-type, token"
     response["Access-Control-Allow-Origin"] = '*'
   end
 

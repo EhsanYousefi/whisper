@@ -1,0 +1,19 @@
+<div class="ui inverted left vertical visible sidebar labeled icon menu" id="sidebar">
+
+  {{#link-to 'member.account' class="item"}}
+    <i class="user icon"></i>
+    Account
+  {{/link-to}}
+
+  {{#link-to 'member.storages' class="item"}}
+    <i class="database icon"></i>
+    Storages
+  {{/link-to}}
+  <a class="item">
+    <i class="pie chart icon"></i>
+    Analytics
+  </a>
+</div>
+<div class="pusher">
+{{liquid-outlet}}
+</div>

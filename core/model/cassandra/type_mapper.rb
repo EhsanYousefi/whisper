@@ -11,9 +11,10 @@ module Cassandra
         'array'     => 'array',
         'float'     => 'float',
         'time'      => 'timestamp',
-        'ip'      => 'inet',
+        'ip'        => 'inet',
         'uuid'      => 'uuid',
-        'timeuuid'  => 'timeuuid'
+        'time_uuid' => 'timeuuid',
+        'sexy_date' => 'varint'
 
       }
 

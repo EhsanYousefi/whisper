@@ -25,27 +25,44 @@ module.exports = function(environment) {
   };
 
   ENV['simple-auth'] = {
-    authorizer: 'simple-auth-authenticator:jwt'
-  };
+    authorizer: 'simple-auth-authorizer:token',
+    crossOriginWhitelist: ['http://localhost:3000']
+  }
+
+  // ENV['simple-auth-token'] = {
+  //   serverTokenEndpoint: 'http://localhost:3000/api/v1/login',
+  //   // dentificationAttributeName: 'identification',
+  //   // tokenAttributeName: 'token',
+  //   identificationField: 'identification',
+  //   passwordField: 'password',
+  //   tokenPropertyName: 'token',
+  //   // authorizationPrefix: '',
+  //   authorizationHeaderName: 'Token',
+  //   headers: {},
+  //   refreshAccessTokens: true,
+  //   serverTokenRefreshEndpoint: 'http://localhost:3000/api/v1/refresh_token',
+  //   tokenExpireName: 'exp',
+  //   refreshLeeway: 100,
+  //   timeFactor: 1000  // example - set to "1000" to convert incoming seconds to milliseconds.
+  // };
+
 
   ENV['simple-auth-token'] = {
     serverTokenEndpoint: 'http://localhost:3000/api/v1/login',
-    // dentificationAttributeName: 'identification',
-    // tokenAttributeName: 'token',
+    serverTokenRefreshEndpoint: 'http://localhost:3000/api/v1/refresh_token',
     identificationField: 'identification',
     passwordField: 'password',
     tokenPropertyName: 'token',
-    authorizationPrefix: '',
+    authorizationPrefix: null,
     authorizationHeaderName: 'Token',
-    headers: {},
-    refreshAccessTokens: true,
-    serverTokenRefreshEndpoint: 'http://localhost:3000/api/v1/refresh_token',
+    timeFactor: 1000,
+    refreshLeeway: 5,
     tokenExpireName: 'exp',
-    refreshLeeway: 100,
-    timeFactor: 200  // example - set to "1000" to convert incoming seconds to milliseconds.
   };
 
   if (environment === 'development') {
+    ENV.APP.LOG_TRANSITIONS = true;
+
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;

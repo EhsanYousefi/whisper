@@ -36,8 +36,16 @@ class App
     controller GetStoragesController
   end
 
+  get '/api/v1/storage_lists' do
+    controller GetStorageListController
+  end
+
   patch '/api/v1/user' do
     controller UpdateUserController
+  end
+
+  post '/api/v1/storage_lists' do
+    controller CreateStorageListController
   end
 
 end

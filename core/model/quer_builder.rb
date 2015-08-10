@@ -1,7 +1,16 @@
 module Cassandra::QueryBuilder
 
   def insert_query(session, column_family, data)
+
     session.execute(
+      "INSERT INTO #{column_family} (#{data.keys.join(',')}) VALUES (#{q_mark(data.size)});", arguments: data.values
+    )
+
+  end
+
+  def insert_query_async(session, column_family, data)
+
+    session.execute_async(
       "INSERT INTO #{column_family} (#{data.keys.join(',')}) VALUES (#{q_mark(data.size)});", arguments: data.values
     )
 

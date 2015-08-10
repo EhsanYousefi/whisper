@@ -54,4 +54,18 @@ FactoryGirl.define do
 
   end
 
+  factory :storage_list do |s|
+
+    s.user_name { user.user_name }
+
+    s.sequence :key do |k|
+      "key#{k}"
+    end
+    
+    s.sequence :desc do |d|
+      "description#{d}"
+    end
+
+  end
+
 end

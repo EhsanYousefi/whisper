@@ -1,0 +1,39 @@
+<!-- <div class="ui modal"> -->
+<div class="header">
+  <i class="add square icon"></i>
+  Create New Storage
+</div>
+<div class="content">
+  <form {{action 'create' on='submit'}} class="ui error form inverted candy segment" id="createServerListForm">
+
+
+    {{#semantic-input
+      name=key
+      placeholder="Keyspace Name"
+      type="text"
+      icon="database icon"
+      inputID="createServerListKey"
+      fieldID="full-width"
+      error=errors.key
+     }}{{/semantic-input}}
+
+     {{#semantic-textarea
+       name=description
+       placeholder="Description"
+       inputID="createServerListDescription"
+       rows="2"
+       error=errors.description
+     }}{{/semantic-textarea}}
+
+  </form>
+</div>
+<div class="actions">
+  <button class="ui grey button close">
+    Cancel
+  </button>
+  <button {{ action 'create' }} class="ui green labeled icon button">
+    Create
+    <i class="add square icon"></i>
+  </button>
+</div>
+<!-- </div> -->

@@ -3,8 +3,11 @@ import Resolver from 'ember/resolver';
 import loadInitializers from 'ember/load-initializers';
 import config from './config/environment';
 
-var App;
+import Controller from './overrides/controller';
+import Route from './overrides/route';
 
+
+var App;
 Ember.MODEL_FACTORY_INJECTIONS = true;
 
 App = Ember.Application.extend({

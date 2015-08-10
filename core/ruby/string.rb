@@ -1,6 +1,6 @@
 class String
   include ActiveSupport::Inflector
-  include Inet
+  include Ip
   include Text
 
   def blank?

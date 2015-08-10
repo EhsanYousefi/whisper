@@ -1,0 +1,9 @@
+<div class={{if error 'error field' 'field'}}>
+    {{ textarea value=name id=inputID rows=rows placeholder=placeholder }}
+</div>
+{{#if error }}
+  {{#each err in error }}
+    <li class="errField">{{err}}</li>
+  {{/each}}
+{{/if}}
+{{yield}}

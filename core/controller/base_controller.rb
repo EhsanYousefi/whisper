@@ -1,4 +1,5 @@
 class BaseController
+
   attr_reader :app
 
   class << self; attr_accessor :_before_start, :_on_finish end

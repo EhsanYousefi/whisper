@@ -1,0 +1,14 @@
+<div class={{if error 'error field' 'field'}}>
+  <div class="ui icon labeled input" id={{fieldID}}>
+    <div class="ui label icon">
+      <i class={{icon}}></i>
+    </div>
+    {{ input type=type value=name id=inputID placeholder=placeholder }}
+    <i class="warning red icon"></i>
+  </div>
+</div>
+{{#if error }}
+  {{#each err in error }}
+    <li class="errField">{{err}}</li>
+  {{/each}}
+{{/if}}

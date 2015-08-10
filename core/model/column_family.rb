@@ -20,8 +20,8 @@ module Cassandra::ColumnFamily
   end
 
   def attributes
-    columns = self.class._columns.map {|k,v| "@#{k.to_s}" }
-    Hash[columns.map { |v| [v.to_s[1..-1].to_sym, instance_variable_get(v)] }].with_indifferent_access
+    columns = self.class._columns.map {|k,v| k }
+    Hash[columns.map { |v| [v, send(v) ] }].with_indifferent_access
   end
 
   alias_method :to_h, :attributes
@@ -41,20 +41,21 @@ module Cassandra::ColumnFamily
     self.attributes = attributes.merge!(hash.stringify_keys)
   end
 
-
-
   module ClassMethods
 
     attr_accessor :_columns;
     attr_accessor :_column_family_name
 
     def columns(hash={})
+
       if self._columns
         self._columns
       else
         self._columns = hash.symbolize_keys
 
         self._columns.each do |k,v|
+
+          v = v.with_indifferent_access
 
           a_write = "#{k}="
 
@@ -66,10 +67,10 @@ module Cassandra::ColumnFamily
 
           # Define getter method ActiveSupport::Drity Compatible
           define_method(k) do
-            instance_variable_get("@#{k}")
+            instance_variable_get("@#{k}") || v[:default]
           end
 
-          send(:validates, k, { type: v })
+          send(:validates, k, { type: v[:type] })
 
         end
 

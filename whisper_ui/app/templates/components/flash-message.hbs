@@ -1,0 +1,15 @@
+{{#if messages }}
+  {{#each msg in messages}}
+    <div class={{ msg.className }}>
+      <i {{ action "closeFlashMessage" errors on "click" }} class="close icon"></i>
+      {{#if msg.header }}
+        <div class="header">
+          {{ msg.header }}
+        </div>
+      {{/if}}
+      {{#if msg.message }}
+        {{msg.message}}
+      {{/if}}
+    </div>
+  {{/each}}
+{{/if}}
