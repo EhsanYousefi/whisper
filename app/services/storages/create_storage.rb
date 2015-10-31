@@ -3,6 +3,8 @@ class CreateStorage
 
   def execute(attributes)
     # Prevent From Mass Assignment
+    attributes = attributes[:storage]
+
     storage = Storage.new(
       user_name:              attributes[:user_name],
       name:                   attributes[:name],

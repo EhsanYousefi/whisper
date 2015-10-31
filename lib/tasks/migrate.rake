@@ -19,7 +19,7 @@ namespace :cassandra do
   end
 
   def load_db_config
-    YAML.load_file(App.root.join('config', 'yaml', 'cassandra.yml'))[App.environment.to_s]
+    config ||= YAML.load_file(App.root.join('config', 'yaml', 'cassandra.yml'))[App.environment.to_s]
   end
 
   def validate_db_config(config)

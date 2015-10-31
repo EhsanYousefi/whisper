@@ -20,7 +20,7 @@ class App
     controller UserRefreshTokenController
   end
 
-  post '/api/v1/storage/create' do
+  post '/api/v1/storages' do
     controller CreateStorageController
   end
 

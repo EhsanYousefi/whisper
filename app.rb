@@ -14,7 +14,7 @@ class App < Sinatra::Base
     begin
       @param ||= JSON.parse(request.body.gets).with_indifferent_access
     rescue
-      {}
+      super
     end
   end
 

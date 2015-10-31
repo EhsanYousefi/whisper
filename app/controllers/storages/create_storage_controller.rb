@@ -3,10 +3,9 @@ class CreateStorageController < ApplicationController
   before_start :authorized?
 
   def main
-
     create_storage = CreateStorage.new
 
-    create_storage.subscribe(CreateColumnFamily)
+    # create_storage.subscribe(CreateColumnFamily)
 
     create_storage.on(:create_storage_successful) do |storage|
 
@@ -23,8 +22,9 @@ class CreateStorageController < ApplicationController
 
     create_storage.on(:create_storage_failed) do |storage|
 
-      app.status 400
-      return app.json validation_error: storage.errors.to_h
+      app.status 422
+      return app.json({ errors: storage.errors.messages.merge({ array_errors: storage.errors.full_messages }) })
+      # return app.json({ errors: storage.errors.messages , array_erros: storage.errors.full_messages })
 
     end
 
